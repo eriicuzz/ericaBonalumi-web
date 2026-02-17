@@ -1,0 +1,16 @@
+// Richiesta dei dati alL'utente tramite prompt
+let larghezza = parseFloat(prompt("Inserisci la larghezza della scatola:"));
+let altezza = parseFloat(prompt("Inserisci l'altezza della scatola:"));
+let lunghezza = parseFloat(prompt("Inserisci la lunghezza della scatola:"));
+
+// Calcolo del volume
+// La formula ê: Volume = Larghezza * Altezza * Lunghezza
+let volume - larghezza * altezza * lunghezza;
+
+// Controllo validità dei dati e output del risultato
+if (isNaN(volume)) {
+console.log("Errore: per favore inserisci solo valori numerici.");
+} else {
+console.log("Le dimensioni inserite sono: " + larghezza + " x " + altezza + " x " + lunghezza);
+console.log("Il volume della scatola è: " + volume);
+}
