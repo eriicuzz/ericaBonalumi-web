@@ -1,0 +1,20 @@
+let m = prompt("Inserisci il valore di m (pendenza):");// 1. Acquisizione dei coefficienti
+let q = prompt("Inserisci il valore di q (intercetta):");
+
+
+let y_quando_x_meno1 = m * -1 + q * 1; // 2. Calcolo dei valori di Y per x = -1 e x = 10 // Uso * 1 per assicurarmi che JavaScript tratti q come un numero e non come testo
+let y_quando_x_10 = m * 10 + q * 1;
+
+
+let incrocio_asse_y = q * 1; // 3. Calcolo intersezioni con gli assi
+let incrocio_asse_x;
+
+
+if (m == 0) {
+    incrocio_asse_x = "Nessuna (la retta è orizzontale)";
+} else {
+    incrocio_asse_x = -q / m;
+}
+console.log("--- ANALISI DELLA RETTA ---");// Restituizione del risultato in console
+console.log("Punto con x = -1: y = " + y_quando_x_meno1);
+
