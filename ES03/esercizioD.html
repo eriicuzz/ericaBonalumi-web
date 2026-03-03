@@ -1,21 +1,23 @@
 <h1>ES03D</h1>
 <script>
-console.log("Inizio test con let:");
-for (let i = 0; i < 3; i++) {
-console.log("Valore dentro il ciclo (let): " + i);
+    // TEST CON LET
+    console.log("--- INIZIO TEST CON LET ---");
+    try {
+        for (let i = 0; i < 3; i++) {
+            console.log("Valore dentro il ciclo (let): " + i);
+        }
+        // Questa riga genererà un errore perché 'i' non esiste fuori dal for
+        console.log("Valore fuori dal ciclo (let): " + i);
+    } catch (error) {
+        console.log("Errore previsto con let: " + error.message);
+    }
 
-console.log("Valore fuori dal ciclo (let): " + i);
-
-try
-
-} catch (error) {
-console.log("Errore con let: " + error.message);
-
-console.log(
---- TEST CON VAR
-console.log("Inizio test con var:")
-for (var j = 0; j < 3; j++)
-console.log("Valore dentro il ciclo (var): " + j);
-
-console.log("Valore fuori dal ciclo (var): " + j);
+    console.log("\n--- INIZIO TEST CON VAR ---");
+    // TEST CON VAR
+    for (var j = 0; j < 3; j++) {
+        console.log("Valore dentro il ciclo (var): " + j);
+    }
+    // Questa riga FUNZIONA perché 'var' è visibile anche fuori dal ciclo
+    console.log("Valore fuori dal ciclo (var): " + j);
+alert("Test completato con successo! Controlla la console (F12) per i dettagli.");
 </script>

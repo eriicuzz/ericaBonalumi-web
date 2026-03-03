@@ -1,23 +1,19 @@
 <h1>Es3b</h1>
 <script>
-let m = prompt("Inserisci il valore di m (pendenza):");// 1. Acquisizione dei coefficienti
-let q = prompt("Inserisci il valore di q (intercetta):");
+let m = parseFloat(prompt("Inserisci il coefficiente angolare (m):"));
+let q = parseFloat(prompt("Inserisci il termine noto (q):"));
 
+// Calcolo punti specifici
+let y_meno1 = m * (-1) + q;
+let y_dieci = m * 10 + q;
 
-let y_quando_x_meno1 = m * -1 + q * 1; // 2. Calcolo dei valori di Y per x = -1 e x = 10 // Uso * 1 per assicurarmi che JavaScript tratti q come un numero e non come testo
-let y_quando_x_10 = m * 10 + q * 1;
+// Intersezioni
+let inter y = q;
+let inter_x = (m !== 0) ? (-q / m) : "Parallela all'asse x";
 
-
-let incrocio_asse_y = q * 1; // 3. Calcolo intersezioni con gli assi
-let incrocio_asse_x;
-
-
-if (m == 0) {
-    incrocio_asse_x = "Nessuna (la retta è orizzontale)";
-} else {
-    incrocio_asse_x = -q / m;
-}
-console.log("--- ANALISI DELLA RETTA ---");// Restituizione del risultato in console
-console.log("Punto con x = -1: y = " + y_quando_x_meno1);
-
+console.log(" --- ANALISI RETTA y = " + m + "x + " + q + " --- ");
+console.log("Punto con x = -1: (-1, " + y_meno1 +")");
+console.log("Punto con x = 10: (10, " + y_dieci +")");
+console.log("Intersezione asse Y: (0, " + inter_y + ")");
+console.log("Intersezione asse X: ("+ inter_x + ", 0)");
 </script>
