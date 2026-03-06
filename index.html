@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Erica Bonalumi</title>
+    <title>Portfolio - Erica Bonalumi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #4361ee;
             --secondary: #3f37c9;
-            --bg: #f0f2f5;
+            --bg: #f4f6f9;
             --card-bg: #ffffff;
-            --text: #1a1c20;
+            --text: #2b2d42;
             --accent: #4cc9f0;
+            --node-green: #5FA04E; /* Colore ufficiale Node.js */
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
-            padding: 20px;
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -30,64 +32,97 @@
             text-align: center;
             margin-bottom: 40px;
             background: white;
-            padding: 30px;
+            padding: 40px 30px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             width: 100%;
             max-width: 900px;
+            box-sizing: border-box;
+            border-top: 5px solid var(--primary);
         }
 
-        h1 { font-size: 2.2rem; color: var(--primary); margin: 0; }
-        .info-student { color: #555; font-size: 1.1rem; margin-top: 10px; font-weight: 500; }
+        h1 { font-size: 2.5rem; color: var(--primary); margin: 0; letter-spacing: -0.5px; }
+        .info-student { color: #6c757d; font-size: 1.1rem; margin-top: 10px; font-weight: 500; }
 
         .section-title {
             width: 100%;
             max-width: 900px;
             text-align: left;
-            margin: 30px 0 15px 0;
-            font-size: 1.5rem;
+            margin: 40px 0 20px 0;
+            font-size: 1.4rem;
+            font-weight: 600;
             color: var(--secondary);
             border-left: 5px solid var(--accent);
             padding-left: 15px;
         }
 
+        .section-node {
+            color: #43853d;
+            border-left-color: var(--node-green);
+        }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
             width: 100%;
             max-width: 900px;
         }
 
         .card {
             background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
+            padding: 30px 20px;
+            border-radius: 16px;
             text-decoration: none;
             color: var(--text);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             display: flex;
             flex-direction: column;
             align-items: center;
-            border: 1px solid transparent;
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
         }
 
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 20px rgba(67, 97, 238, 0.15);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.12);
             border-color: var(--primary);
         }
 
-        .icon { font-size: 2.5rem; margin-bottom: 10px; }
-        .card h3 { margin: 10px 0 5px 0; font-size: 1.1rem; color: var(--primary); }
-        .card p { margin: 0; font-size: 0.85rem; color: #777; text-align: center; }
+        .card.node-card:hover {
+            border-color: var(--node-green);
+            box-shadow: 0 15px 30px rgba(95, 160, 78, 0.15);
+        }
+
+        .icon { font-size: 2.8rem; margin-bottom: 15px; }
+        .card h3 { margin: 0 0 8px 0; font-size: 1.2rem; color: var(--primary); font-weight: 600; }
+        .card.node-card h3 { color: var(--node-green); }
+        .card p { margin: 0; font-size: 0.9rem; color: #6c757d; }
+
+        /* Stile per il finto terminale di Node.js */
+        .terminal-box {
+            background-color: #1e1e24;
+            color: #4cc9f0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            width: 80%;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+            text-align: left;
+        }
+        .terminal-prompt { color: var(--node-green); font-weight: bold; margin-right: 5px; }
 
         footer {
-            margin-top: 50px;
-            padding: 20px;
-            font-size: 0.85rem;
+            margin-top: 60px;
+            padding: 30px;
+            font-size: 0.9rem;
             color: #888;
+            text-align: center;
+            width: 100%;
+            border-top: 1px solid #e1e4e8;
         }
     </style>
 </head>
@@ -95,7 +130,7 @@
 
     <div class="header">
         <h1>Erica Bonalumi</h1>
-        <div class="info-student">Classe 4^CI • A.S. 2025/2026</div>
+        <div class="info-student">Classe 4^CI • Anno Scolastico 2025/2026</div>
     </div>
 
     <div class="section-title">Esercitazione ES02</div>
@@ -114,25 +149,46 @@
             <h3>Esercizio 3A</h3>
             <p>Calcolo Volume Scatola</p>
         </a>
-
         <a href="ES03/esercizioB.html" class="card">
             <div class="icon">📈</div>
             <h3>Esercizio 3B</h3>
             <p>Analisi della Retta</p>
         </a>
-
         <a href="ES03/esercizioC.html" class="card">
             <div class="icon">🎓</div>
             <h3>Esercizio 3C</h3>
             <p>Esito Voto</p>
         </a>
-
         <a href="ES03/esercizioD.html" class="card">
             <div class="icon">🔑</div>
             <h3>Esercizio 3D</h3>
             <p>Let vs Var</p>
         </a>
     </div>
+
+    <div class="section-title section-node">Esercitazioni con Node.js</div>
+    <div class="grid">
+        <a href="calc.js" target="_blank" class="card node-card">
+            <div class="icon">🧮</div>
+            <h3>Calcolatrice</h3>
+            <p>Uso di process.argv</p>
+            <div class="terminal-box">
+                <span class="terminal-prompt">$</span>node calc.js
+            </div>
+        </a>
+        <a href="loop.js" target="_blank" class="card node-card">
+            <div class="icon">⏳</div>
+            <h3>Ciclo Decrescente</h3>
+            <p>Stampa da 100 a 0</p>
+            <div class="terminal-box">
+                <span class="terminal-prompt">$</span>node loop.js
+            </div>
+        </a>
+    </div>
+
+    <footer>
+        Realizzato Erica Bonalumi
+    </footer>
 
 </body>
 </html>
