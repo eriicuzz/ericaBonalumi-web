@@ -1,0 +1,5 @@
+// Partiamo da 100, continuiamo finché i è maggiore o uguale a 0, 
+// e a ogni passo sottraiamo 20 (i -= 20)
+for (let i = 100; i >= 0; i -= 20) {
+    console.log(i);
+}
