@@ -13,7 +13,7 @@
             --card-bg: #ffffff;
             --text: #2b2d42;
             --accent: #4cc9f0;
-            --node-green: #5FA04E; /* Colore ufficiale Node.js */
+            --node-green: #5FA04E; 
         }
 
         body {
@@ -56,14 +56,10 @@
             padding-left: 15px;
         }
 
-        .section-node {
-            color: #43853d;
-            border-left-color: var(--node-green);
-        }
-
+        /* Griglia coerente */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
             width: 100%;
             max-width: 900px;
@@ -90,26 +86,41 @@
             border-color: var(--primary);
         }
 
-        .card.node-card:hover {
-            border-color: var(--node-green);
-            box-shadow: 0 15px 30px rgba(95, 160, 78, 0.15);
+        /* Colore specifico per sezione Node/ES04 */
+        .node-card:hover {
+            border-color: var(--node-green) !important;
+            box-shadow: 0 15px 30px rgba(95, 160, 78, 0.15) !important;
         }
 
         .icon { font-size: 2.8rem; margin-bottom: 15px; }
-        .card h3 { margin: 0 0 8px 0; font-size: 1.2rem; color: var(--primary); font-weight: 600; }
-        .card.node-card h3 { color: var(--node-green); }
-        .card p { margin: 0; font-size: 0.9rem; color: #6c757d; }
+        
+        /* Testi uniformi nelle card */
+        .card h3 { 
+            margin: 0 0 8px 0; 
+            font-size: 1.2rem; 
+            color: var(--primary); 
+            font-weight: 600; 
+        }
+        
+        .node-card h3 { color: var(--node-green); }
 
-        /* Stile per il finto terminale di Node.js */
+        .card p { 
+            margin: 0; 
+            font-size: 0.95rem; 
+            color: #6c757d; 
+            line-height: 1.4;
+        }
+
+        /* Stile Terminale Uniforme */
         .terminal-box {
             background-color: #1e1e24;
             color: #4cc9f0;
-            padding: 10px 15px;
+            padding: 10px 12px;
             border-radius: 8px;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-top: 15px;
-            width: 80%;
+            width: 90%;
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
             text-align: left;
         }
@@ -138,7 +149,7 @@
         <a href="ES02/index.html" class="card">
             <div class="icon">📁</div>
             <h3>Esercizio 02</h3>
-            <p>Base JavaScript</p>
+            <p>Sviluppo Base JavaScript</p>
         </a>
     </div>
 
@@ -157,22 +168,22 @@
         <a href="ES03/esercizioC.html" class="card">
             <div class="icon">🎓</div>
             <h3>Esercizio 3C</h3>
-            <p>Esito Voto</p>
+            <p>Gestione Esito Voto</p>
         </a>
         <a href="ES03/esercizioD.html" class="card">
             <div class="icon">🔑</div>
             <h3>Esercizio 3D</h3>
-            <p>Let vs Var</p>
+            <p>Ambito Let vs Var</p>
         </a>
     </div>
 
-    <div class="section-title">Esercitazione ES04</div>
+    <div class="section-title" style="color: var(--node-green); border-left-color: var(--node-green);">Esercitazione ES04 (Node.js)</div>
     <div class="grid">
         
         <a href="ES04/esercizio1.txt" target="_blank" class="card node-card">
             <div class="icon">📝</div>
             <h3>Esercizio 1</h3>
-            <p>Script Node.js</p>
+            <p>Script Operazioni Base</p>
             <div class="terminal-box">
                 <span class="terminal-prompt">$</span>node esercizio1.js
             </div>
@@ -181,7 +192,7 @@
         <a href="ES04/esercizio2.txt" target="_blank" class="card node-card">
             <div class="icon">💡</div>
             <h3>Esercizio 2</h3>
-            <p>Script Node.js</p>
+            <p>Manipolazione Dati</p>
             <div class="terminal-box">
                 <span class="terminal-prompt">$</span>node esercizio2.js
             </div>
@@ -190,22 +201,25 @@
         <a href="ES04/esercizio3.txt" target="_blank" class="card node-card">
             <div class="icon">🚀</div>
             <h3>Esercizio 3</h3>
-            <p>Script Node.js</p>
+            <p>Logica Condizionale</p>
             <div class="terminal-box">
                 <span class="terminal-prompt">$</span>node esercizio3.js
             </div>
         </a>
 
-        <a href="ES04/calc.html" class="card">
-            <div class="icon"> ^=^t^q</div>
+        <a href="ES04/calc.html" class="card node-card">
+            <div class="icon">🧮</div>
             <h3>Esercizio 4</h3>
-            <p>Calcolatrice</p>
+            <p>Interfaccia Calcolatrice</p>
+            <div class="terminal-box">
+                <span class="terminal-prompt">$</span>node calc.js
+            </div>
         </a>
         
         <a href="ES04/loop.txt" target="_blank" class="card node-card">
             <div class="icon">⏳</div>
-            <h3>Ciclo Decrescente</h3>
-            <p>Stampa da 100 a 0</p>
+            <h3>Ciclo For</h3>
+            <p>Stampa Decrescente 100-0</p>
             <div class="terminal-box">
                 <span class="terminal-prompt">$</span>node loop.js
             </div>
@@ -214,4 +228,4 @@
     </div>
 
 </body>
-</html>
+</html>                                       
