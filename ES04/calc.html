@@ -2,22 +2,18 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcolatrice Avanzata HTML</title>
+    <title>Calcolatrice Semplice</title>
     <style>
-        body { font-family: monospace; line-height: 1.5; padding: 20px; background-color: #f4f4f4; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 500px; }
+        body { font-family: sans-serif; padding: 20px; background-color: #f0f0f0; }
+        .container { background: white; padding: 20px; border-radius: 10px; max-width: 400px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        input, select, button { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
         #result { 
-            white-space: pre; 
-            background: #222; 
-            color: #2ecc71; 
-            padding: 15px; 
             margin-top: 20px; 
-            border-radius: 5px; 
-            display: none; 
+            padding: 15px; 
+            background: #eef; 
+            border-left: 5px solid #3498db; 
+            font-weight: bold; 
         }
-        input, button { margin: 5px 0; padding: 8px; }
-        .error { color: #e74c3c; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -25,87 +21,54 @@
 <div class="container">
     <h1>🧮 Calcolatrice</h1>
 
-    <form id="calculatorForm" onsubmit="calcola(); return false;">
-        <label>Primo numero:</label><br>
-        <input type="number" id="num1" step="any" required><br>
-        
-        <label>Operazione (add, sot, mult, div o +, -, *, /):</label><br>
-        <input type="text" id="operation" placeholder="es. add o *" required><br>
-        
-        <label>Secondo numero:</label><br>
-        <input type="number" id="num2" step="any" required><br>
-        
-        <button type="submit" style="background: #3498db; color: white; border: none; cursor: pointer; width: 100%;">ESEGUI CALCOLO</button>
-    </form>
+    <label>Primo numero:</label>
+    <input type="number" id="num1">
 
-    <div id="result"></div>
+    <label>Operatore (+, -, *, /):</label>
+    <input type="text" id="operator" placeholder="Inserisci l'operatore">
+
+    <label>Secondo numero:</label>
+    <input type="number" id="num2">
+
+    <button onclick="calcola()">ESEGUI CALCOLO</button>
+
+    <div id="result">Il risultato apparirà qui</div>
 </div>
 
 <script>
     function calcola() {
-        // 1. Acquisizione input (come facevi con process.argv)
-        const n1 = parseFloat(document.getElementById('num1').value);
-        const operazione = document.getElementById('operation').value.trim().toLowerCase();
-        const n2 = parseFloat(document.getElementById('num2').value);
-        const resultDiv = document.getElementById('result');
-
-        // Reset e validazione numeri
-        resultDiv.style.display = "block";
-        if (isNaN(n1) || isNaN(n2)) {
-            resultDiv.innerHTML = '<span class="error">❌ Errore: Inserisci numeri validi!</span>';
-            return;
-        }
+        // 1. Recuperiamo i valori dai campi di input (come facevamo con process.argv)
+        const n1 = Number(document.getElementById('num1').value);
+        const op = document.getElementById('operator').value;
+        const n2 = Number(document.getElementById('num2').value);
+        const display = document.getElementById('result');
 
         let risultato;
-        let simbolo;
 
-        // 2. Logica di calcolo (il tuo Switch Case)
-        switch (operazione) {
-            case 'add':
+        // 2. Logica di calcolo identica alla versione Node.js
+        switch (op) {
             case '+':
                 risultato = n1 + n2;
-                simbolo = '+';
                 break;
-            case 'sot':
             case '-':
                 risultato = n1 - n2;
-                simbolo = '-';
                 break;
-            case 'mult':
             case '*':
                 risultato = n1 * n2;
-                simbolo = 'x';
                 break;
-            case 'div':
             case '/':
-                if (n2 !== 0) {
-                    risultato = n1 / n2;
+                if (n2 === 0) {
+                    risultato = "Errore: divisione per zero!";
                 } else {
-                    risultato = "Errore (Divisione per zero)";
+                    risultato = n1 / n2;
                 }
-                simbolo = '÷';
                 break;
             default:
-                risultato = "Operazione non valida";
-                simbolo = '?';
+                risultato = "Operatore non valido!";
         }
 
-        // 3. Formattazione output stile Console/Terminale
-        const separator = '='.repeat(40);
-        const dataLocale = new Date().toLocaleDateString('it-IT');
-        const oraLocale = new Date().toLocaleTimeString('it-IT');
-        
-        // Costruiamo la stringa finale
-        let output = `${separator}\n`;
-        output += `🧮 Operazione: ${n1} ${simbolo} ${n2}\n`;
-        output += `✅ Risultato:  ${risultato}\n`;
-        output += `${separator}\n\n`;
-        output += `📅 Data: ${dataLocale}\n`;
-        output += `⏰ Ora: ${oraLocale}\n`;
-        output += `🌐 Browser: ${navigator.userAgent.split(' ').pop()}\n`; // Sostituisce la versione di Node
-        output += `🖥️ Piattaforma: ${navigator.platform}`;
-
-        resultDiv.textContent = output;
+        // 3. Mostriamo il risultato nella pagina
+        display.innerHTML = "Risultato: " + risultato;
     }
 </script>
 
