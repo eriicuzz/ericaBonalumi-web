@@ -1,61 +1,39 @@
-
-// Ottieni gli argomenti (escludendo i primi due)
-const args = process.argv.slice(2);
-
-// Verifica se sono stati passati i 3 argomenti necessari
-if (args.length < 3) {
-  console.log('❌ Errore: Devi fornire due numeri e un\'operazione!');
-  console.log('\n📖 Utilizzo:');
-  console.log('   node calc.js <numero1> <operazione> <numero2>');
-  console.log('\n💡 Esempi:');
-  console.log('   node calc.js 5 add 3');
-  console.log('   node calc.js 10 mult 2');
-  process.exit(1);
-}
-
-const n1 = parseFloat(args[0]);
-const operazione = args[1].toLowerCase();
-const n2 = parseFloat(args[2]);
+// 1. RECUPERO DEI DATI
+// process.argv è un array che contiene gli argomenti passati da terminale.
+// [2] è il primo numero, [3] è l'operatore, [4] è il secondo numero.
+const num1 = Number(process.argv[2]);
+const operatore = process.argv[3];
+const num2 = Number(process.argv[4]);
 
 let risultato;
-let simbolo;
 
-// Esegui il calcolo
-switch (operazione) {
-  case 'add':
-  case '+':
-    risultato = n1 + n2;
-    simbolo = '+';
-    break;
-  case 'sub':
-  case '-':
-    risultato = n1 - n2;
-    simbolo = '-';
-    break;
-  case 'mult':
-  case '*':
-    risultato = n1 * n2;
-    simbolo = 'x';
-    break;
-  case 'div':
-  case '/':
-    risultato = n2 !== 0 ? n1 / n2 : "Errore (Divisione per zero)";
-    simbolo = '÷';
-    break;
-  default:
-    risultato = "Operazione non valida (usa add, sub, mult, div)";
-    simbolo = '?';
+// 2. LOGICA DI CALCOLO
+// Usiamo lo switch per decidere cosa fare in base all'operatore
+switch (operatore) {
+    case '+':
+        risultato = num1 + num2;
+        break;
+    case '-':
+        risultato = num1 - num2;
+        break;
+    case '*':
+    case 'x': // Gestiamo anche la 'x' come moltiplicazione, è più intuitivo
+        risultato = num1 * num2;
+        break;
+    case '/':
+        // Controllo fondamentale: non si può dividere per zero
+        if (num2 === 0) {
+            risultato = "Errore: impossibile dividere per zero";
+        } else {
+            risultato = num1 / num2;
+        }
+        break;
+    default:
+        risultato = "Operatore non riconosciuto (usa + - * /)";
 }
 
-// Stampa l'output formattato
-console.log('\n' + '='.repeat(50));
-console.log(`🧮 Operazione: ${n1} ${simbolo} ${n2}`);
-console.log(`✅ Risultato:  ${risultato}`);
-console.log('='.repeat(50) + '\n');
-
-// Informazioni aggiuntive di sistema
-console.log(`📅 Data: ${new Date().toLocaleDateString('it-IT')}`);
-console.log(`⏰ Ora: ${new Date().toLocaleTimeString('it-IT')}`);
-console.log(`💻 Node.js versione: ${process.version}`);
-console.log(`🖥️ Sistema operativo: ${process.platform}`);
-console.log();
+// 3. STAMPA DEL RISULTATO
+console.log("========================");
+console.log("Operazione:", num1, operatore, num2);
+console.log("Risultato:", risultato);
+console.log("========================");

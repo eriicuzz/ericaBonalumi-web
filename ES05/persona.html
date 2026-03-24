@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esercizio Oggetto Persona</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .form-group { margin-bottom: 10px; }
+        label { display: inline-block; width: 100px; }
+        button { margin-top: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Inserisci i dati della persona</h2>
+
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Inserisci il nome">
+    </div>
+
+    <div class="form-group">
+        <label for="cognome">Cognome:</label>
+        <input type="text" id="cognome" placeholder="Inserisci il cognome">
+    </div>
+
+    <div class="form-group">
+        <label for="eta">Età:</label>
+        <input type="number" id="eta" placeholder="Inserisci l'età">
+    </div>
+
+    <button onclick="creaPersona()">Crea Oggetto Persona</button>
+
+    <p><em>Apri la console del browser (F12) per vedere il risultato!</em></p>
+
+    <script>
+        function creaPersona() {
+            // 1. Otteniamo i valori dagli input HTML
+            const nomeValue = document.getElementById('nome').value;
+            const cognomeValue = document.getElementById('cognome').value;
+            const etaValue = document.getElementById('eta').value;
+
+            // Valutazione rapida: controlliamo che i campi non siano vuoti
+            if (!nomeValue || !cognomeValue || !etaValue) {
+                alert("Per favore, compila tutti i campi!");
+                return;
+            }
+
+            // 2. Creazione dell'oggetto persona
+            const persona = {
+                nome: nomeValue,
+                cognome: cognomeValue,
+                eta: parseInt(etaValue) // Convertiamo la stringa in numero
+            };
+
+            // 3. Stampa su console dell'oggetto
+            console.log("Oggetto Persona creato:");
+            console.log(persona);
+            
+            // Suggerimento extra: stampiamo un messaggio di conferma nel browser
+            alert("Oggetto creato! Controlla la console del browser.");
+        }
+    </script>
+</body>
+</html>
