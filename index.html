@@ -1,208 +1,159 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sito di Erica Bonalumi</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<style>
-    :root {
-        --primary: #4361ee;
-        --secondary: #3f37c9;
-        --bg: #f4f6f9;
-        --card-bg: #ffffff;
-        --text: #2b2d42;
-        --accent: #4cc9f0;
-        --node-green: #5FA04E; 
-        --hover-shadow: rgba(67, 97, 238, 0.12);
-        --border-color: #e1e4e8;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sito di Erica Bonalumi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --bg: #f4f6f9;
+            --card-bg: #ffffff;
+            --text: #2b2d42;
+            --accent: #4cc9f0;
+            --node-green: #5FA04E; 
+        }
 
-    body {
-        font-family: 'Inter', sans-serif;
-        background-color: var(--bg);
-        color: var(--text);
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    header {
-        text-align: center;
-        margin-bottom: 50px;
-        padding: 20px;
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        width: 100%;
-        max-width: 1000px;
-        border-top: 5px solid var(--primary);
-    }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 900px;
+            box-sizing: border-box;
+            border-top: 5px solid var(--primary);
+        }
 
-    h1 {
-        font-size: 2.8rem;
-        color: var(--primary);
-        margin: 0;
-        letter-spacing: -0.5px;
-    }
+        h1 { font-size: 2.5rem; color: var(--primary); margin: 0; letter-spacing: -0.5px; }
+        .info-student { color: #6c757d; font-size: 1.1rem; margin-top: 10px; font-weight: 500; }
 
-    .info-student {
-        color: #6c757d;
-        font-size: 1.2rem;
-        margin-top: 10px;
-        font-weight: 500;
-    }
+        .section-title {
+            width: 100%;
+            max-width: 900px;
+            text-align: left;
+            margin: 40px 0 20px 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--secondary);
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+        }
 
-    section {
-        margin-top: 40px;
-        width: 100%;
-        max-width: 1000px;
-    }
+        /* Griglia coerente */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 900px;
+        }
 
-    .section-title {
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: var(--secondary);
-        border-left: 6px solid var(--accent);
-        padding-left: 15px;
-        margin-bottom: 20px;
-    }
+        .card {
+            background: var(--card-bg);
+            padding: 30px 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+        }
 
-    /* Griglia */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-    }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.12);
+            border-color: var(--primary);
+        }
 
-    /* Card generico */
-    .card {
-        background: var(--card-bg);
-        padding: 25px 15px;
-        border-radius: 16px;
-        text-decoration: none;
-        color: var(--text);
-        box-shadow: 0 4px 15px var(--hover-shadow);
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border: 1px solid rgba(0,0,0,0.05);
-        text-align: center;
-        cursor: pointer;
-    }
+        /* Colore specifico per sezione Node/ES04 */
+        .node-card:hover {
+            border-color: var(--node-green) !important;
+            box-shadow: 0 15px 30px rgba(95, 160, 78, 0.15) !important;
+        }
 
-    .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px var(--hover-shadow);
-        border-color: var(--primary);
-    }
+        .icon { font-size: 2.8rem; margin-bottom: 15px; }
+        
+        /* Testi uniformi nelle card */
+        .card h3 { 
+            margin: 0 0 8px 0; 
+            font-size: 1.2rem; 
+            color: var(--primary); 
+            font-weight: 600; 
+        }
+        
+        .node-card h3 { color: var(--node-green); }
 
-    /* Icon style */
-    .icon {
-        font-size: 2.8rem;
-        margin-bottom: 12px;
-    }
+        .card p { 
+            margin: 0; 
+            font-size: 0.95rem; 
+            color: #6c757d; 
+            line-height: 1.4;
+        }
 
-    /* Titoli nelle card */
-    .card h3 {
-        margin: 0 0 8px 0;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--primary);
-    }
-    /* Testo nelle card */
-    .card p {
-        margin: 0;
-        font-size: 0.95rem;
-        color: #6c757d;
-        line-height: 1.4;
-    }
+        /* Stile Terminale Uniforme */
+        .terminal-box {
+            background-color: #1e1e24;
+            color: #4cc9f0;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            width: 90%;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+            text-align: left;
+        }
+        .terminal-prompt { color: var(--node-green); font-weight: bold; margin-right: 5px; }
 
-    /* Sezione special per Node.js */
-    .node-card {
-        border-color: var(--node-green) !important;
-    }
-    .node-card:hover {
-        border-color: var(--node-green) !important;
-        box-shadow: 0 15px 30px rgba(95, 160, 78, 0.15) !important;
-    }
-    .node-card h3 {
-        color: var(--node-green);
-    }
-
-    /* Footer */
-    footer {
-        margin-top: 60px;
-        padding: 20px;
-        font-size: 0.9rem;
-        color: #888;
-        text-align: center;
-        width: 100%;
-        border-top: 1px solid var(--border-color);
-    }
-
-    /* Link styles */
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-</style>
+        footer {
+            margin-top: 60px;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: #888;
+            text-align: center;
+            width: 100%;
+            border-top: 1px solid #e1e4e8;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <h1>Erica Bonalumi</h1>
-    <div class="info-student">Classe 4^CI • Anno Scolastico 2025/2026</div>
-</header>
+    <div class="header">
+        <h1>Erica Bonalumi</h1>
+        <div class="info-student">Classe 4^CI • Anno Scolastico 2025/2026</div>
+    </div>
 
-<section>
-    <div class="section-title">Esercitazioni</div>
+    <div class="section-title">Esercitazione ES02</div>
     <div class="grid">
-        <a href="#es01" class="card">
+        <a href="ES02/index.html" class="card">
             <div class="icon">📁</div>
-            <h3>ES01</h3>
-            <p>Primi esercizi</p>
-        </a>
-        <a href="#es02" class="card">
-            <div class="icon">📁</div>
-            <h3>ES02</h3>
+            <h3>Esercizio 02</h3>
             <p>Sviluppo Base JavaScript</p>
         </a>
-        <a href="#es03" class="card">
-            <div class="icon">📦</div>
-            <h3>ES03</h3>
-            <p>Analisi e Calcolo</p>
-        </a>
-        <a href="#es04" class="card">
-            <div class="icon">🧮</div>
-            <h3>ES04</h3>
-            <p>Node.js Esercizi</p>
-        </a>
-        <a href="#es05" class="card">
-            <div class="icon">📝</div>
-            <h3>ES05</h3>
-            <p>Person & Libri</p>
-        </a>
     </div>
-</section>
 
-<!-- Sezioni di dettaglio -->
-<section id="es01" style="margin-top:50px;">
-    <div class="section-title">Esercizio 01</div>
-    <p>Contenuto di ES01... (Puoi inserire i dettagli o link)</p>
-</section>
-
-<section id="es02">
-    <div class="section-title">Esercizio 02</div>
-    <p><a href="ES02/index.html" class="card" style="width:auto; display:inline-block;">Vai a ES02</a></p>
-</section>
-
-<section id="es03">
-    <div class="section-title">Esercizio 03</div>
+    <div class="section-title">Esercitazione ES03</div>
     <div class="grid">
         <a href="ES03/esercizioA.html" class="card">
             <div class="icon">📦</div>
@@ -225,11 +176,10 @@
             <p>Ambito Let vs Var</p>
         </a>
     </div>
-</section>
 
-<section id="es04">
-    <div class="section-title">Esercizi ES04 (Node.js)</div>
+    <div class="section-title" style="color: var(--node-green); border-left-color: var(--node-green);">Esercitazione ES04 (Node.js)</div>
     <div class="grid">
+        
         <a href="ES04/esercizio1.txt" target="_blank" class="card node-card">
             <div class="icon">📝</div>
             <h3>Esercizio 1</h3>
@@ -238,6 +188,7 @@
                 <span class="terminal-prompt">$</span>node esercizio1.js
             </div>
         </a>
+
         <a href="ES04/esercizio2.txt" target="_blank" class="card node-card">
             <div class="icon">💡</div>
             <h3>Esercizio 2</h3>
@@ -246,6 +197,7 @@
                 <span class="terminal-prompt">$</span>node esercizio2.js
             </div>
         </a>
+
         <a href="ES04/esercizio3.txt" target="_blank" class="card node-card">
             <div class="icon">🚀</div>
             <h3>Esercizio 3</h3>
@@ -254,6 +206,7 @@
                 <span class="terminal-prompt">$</span>node esercizio3.js
             </div>
         </a>
+
         <a href="ES04/calc.html" class="card node-card">
             <div class="icon">🧮</div>
             <h3>Esercizio 4</h3>
@@ -262,6 +215,7 @@
                 <span class="terminal-prompt">$</span>node calc.js
             </div>
         </a>
+        
         <a href="ES04/loop.txt" target="_blank" class="card node-card">
             <div class="icon">⏳</div>
             <h3>Ciclo For</h3>
@@ -270,24 +224,27 @@
                 <span class="terminal-prompt">$</span>node loop.js
             </div>
         </a>
-    </div>
-</section>
 
-<!-- Aggiunta ES05 -->
-<section id="es05" style="margin-top:50px;">
-    <div class="section-title">Esercizio 05</div>
-    <div class="grid">
-        <a href="persona.html" class="card">
-            <div class="icon">👤</div>
-            <h3>Persona</h3>
-            <p>Gestione dati Persona</p>
-        </a>
-        <a href="libro.txt" class="card">
-            <div class="icon">📚</div>
-            <h3>Libri</h3>
-            <p>Gestione libreria</p>
-        </a>
     </div>
-</section>
+<div class="section-title">Esercitazione ES05 (Oggetti JS)</div>
+    <div class="grid">
+        
+        <a href="ES05/persona.html" class="card">
+            <div class="icon">👤</div>
+            <h3>Esercizio 5A</h3>
+            <p>Form & Oggetto Persona</p>
+            <p><small>(Interfaccia HTML)</small></p>
+        </a>
+
+        <a href="ES05/libro.txt" target="_blank" class="card node-card">
+            <div class="icon">📖</div>
+            <h3>Esercizio 5B</h3>
+            <p>Ciclo for...in Libro</p>
+            <div class="terminal-box">
+                <span class="terminal-prompt">$</span>node libro.js
+            </div>
+        </a>
+
+    </div>
 </body>
 </html>
