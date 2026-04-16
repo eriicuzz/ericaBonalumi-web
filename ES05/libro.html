@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio Oggetto Libro</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+        .container { border: 1px solid #ccc; padding: 15px; border-radius: 8px; max-width: 400px; }
+        h2 { color: #333; border-bottom: 2px solid #333; }
+        p { margin: 5px 0; font-family: monospace; }
+        b { color: #007bff; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Dettagli del Libro</h2>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        // 1. Creazione dell'oggetto libro
+        const book = {
+            titolo: "Il Nome della Rosa",
+            autore: "Umberto Eco",
+            annoPubblicazione: 1980,
+            genere: "Giallo storico",
+            numeroPagine: 512
+        };
+
+        // Riferimento all'elemento HTML dove scriveremo
+        const outputDiv = document.getElementById('output');
+
+        // 2. Utilizzo del ciclo for...in
+        for (let key in book) {
+            // Stampiamo nella console del browser (come facevi in Node.js)
+            console.log(`${key} -> ${book[key]}`);
+
+            // Stampiamo anche sulla pagina HTML per l'utente
+            outputDiv.innerHTML += `<p><b>${key}:</b> ${book[key]}</p>`;
+        }
+    </script>
+</body>
+</html>
