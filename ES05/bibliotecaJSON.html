@@ -1,61 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-    <title>ES04 - JSON Biblioteca</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercitazione 04 - JSON e Storage</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 10px; }
+        .output { background: #202124; color: #34d399; padding: 15px; border-radius: 8px; font-family: monospace; white-space: pre-wrap; margin-top: 20px; overflow-x: auto; }
+        .label { color: #818cf8; font-weight: bold; }
+    </style>
 </head>
 <body>
 
-    <h1>Esercitazione 04: JSON e Storage</h1>
-    
-    <p>Guarda i risultati qui sotto:</p>
-    <hr>
+<div class="container">
+    <h1>ES04: Gestione JSON e Biblioteca</h1>
+    <p>I risultati dell'esecuzione del codice JavaScript sono mostrati nel riquadro sottostante:</p>
 
-    <pre id="risultati" style="background: #eee; padding: 15px;"></pre>
+    <div id="log-output" class="output"></div>
+</div>
 
-    <script>
-        const display = document.getElementById('risultati');
+<script>
+    // Helper per scrivere i risultati sulla pagina
+    const outputDiv = document.getElementById('log-output');
+    function logPage(label, content) {
+        outputDiv.innerHTML += `<span class="label">>> ${label}</span>\n${content}\n\n`;
+    }
 
-        // 1. DATI DI ESEMPIO
-        const libroEsempio = { titolo: "Esempio", autore: "Autore", anno: 2024, pagine: 100 };
-        const jsonLibro = '{"titolo":"Don Chisciotte","autore":"Cervantes","anno":1605}';
-        const utente = { nome: "Mario", psw: "segreta123" };
+    // --- DATI DI SUPPORTO ---
+    const libroCompleto = { titolo: "Esempio", autore: "Autore", anno: 2024, isbn: "123", pagine: 100 };
+    const jsonString = '{"titolo":"Don Chisciotte","autore":"Cervantes","anno":1605}';
+    const arrayJSON = '[{"titolo":"Libro 1"},{"titolo":"Libro 2"}]';
+    const jsonNonValido = '{"titolo": "Errore" , }'; 
+    const prestitoJSON = '{"libro":"1984","data":"2024-04-16T10:00:00Z"}';
+    const bibliotecaOriginale = { nome: "Civica", indirizzo: { città: "Milano" } };
 
-        // 2. SERIALIZZAZIONE (Oggetto -> JSON)
-        // Usiamo un filtro per non salvare la password (psw)
-        const utenteJSON = JSON.stringify(utente, (key, value) => {
-            if (key === "psw") return undefined;
-            return value;
-        });
+    // --- PARTE 1: SERIALIZZAZIONE ---
+    const operaLibro = { titolo: "Il Nome della Rosa", scrittore: "Umberto Eco", pubblicazione: 1980 };
+    const stringaJSON = JSON.stringify(operaLibro);
+    logPage("1.1 JSON semplice", stringaJSON);
 
-        // 3. DESERIALIZZAZIONE (JSON -> Oggetto)
-        const libroDati = JSON.parse(jsonLibro);
+    const datiEssenziali = JSON.stringify(libroCompleto, ["titolo", "autore", "anno"]);
+    logPage("1.3 Filtrato (Titolo, Autore, Anno)", datiEssenziali);
 
-        // 4. CLASSE BIBLIOTECA SEMPLICE
-        class Biblioteca {
-            constructor() {
-                this.libri = [];
-            }
-            aggiungi(titolo, pag) {
-                this.libri.push({ titolo: titolo, pagine: pag });
-            }
-            totalePagine() {
-                return this.libri.reduce((somma, l) => somma + l.pagine, 0);
-            }
+    // --- PARTE 2: DESERIALIZZAZIONE ---
+    const libroConvertito = JSON.parse(jsonString);
+    logPage("2.1 Da stringa a oggetto", `Titolo: ${libroConvertito.titolo}`);
+
+    try {
+        const checkJSON = JSON.parse(jsonNonValido);
+    } catch (err) {
+        logPage("2.3 Errore catturato correttamente", err.message);
+    }
+
+    // --- PARTE 3: REPLACER E REVIVER ---
+    const profiloUtente = { user: "MarioRossi", psw: "segreto" };
+    const filtroPrivacy = (key, value) => (key === "psw" || key === "password") ? undefined : value;
+    const utentePrivato = JSON.stringify(profiloUtente, filtroPrivacy);
+    logPage("3.1 Utente (senza password)", utentePrivato);
+
+    const ripristinaDate = (key, val) => {
+        if (typeof val === "string" && val.length > 15 && !isNaN(Date.parse(val))) {
+            return new Date(val);
         }
+        return val;
+    };
+    const prestitoFinale = JSON.parse(prestitoJSON, ripristinaDate);
+    logPage("3.3 Data convertita?", `È un oggetto Date? ${prestitoFinale.data instanceof Date}`);
 
-        // Test finale
-        const miaBiblio = new Biblioteca();
-        miaBiblio.aggiungi("Inferno", 400);
-        miaBiblio.aggiungi("1984", 328);
+    // --- PARTE 5: SIMULAZIONE STORAGE ---
+    const databaseLocale = (function() {
+        const memoria = {};
+        return {
+            salva: (key, val) => { memoria[key] = JSON.stringify(val); },
+            carica: (key) => {
+                const item = memoria[key];
+                return item ? JSON.parse(item) : null;
+            }
+        };
+    })();
 
-        // STAMPA A VIDEO
-        display.innerHTML = 
-            "1. Oggetto utente senza password: " + utenteJSON + "\n\n" +
-            "2. Libro recuperato da JSON: " + libroDati.titolo + "\n\n" +
-            "3. Totale libri in biblioteca: " + miaBiblio.libri.length + "\n" +
-            "4. Somma totale pagine: " + miaBiblio.totalePagine();
+    // --- PARTE 6: CLASSE BIBLIOTECA ---
+    class GestoreBiblioteca {
+        constructor(nomeChiave = "my_app_data") {
+            this.chiave = nomeChiave;
+            this.archivio = this.inizializza();
+        }
+        inizializza() {
+            const salvataggio = databaseLocale.carica(this.chiave);
+            return salvataggio ? salvataggio : [];
+        }
+        inserisci(libro) {
+            this.archivio.push(libro);
+            databaseLocale.salva(this.chiave, this.archivio);
+        }
+        generaReport() {
+            return {
+                totaleLibri: this.archivio.length,
+                pagineTotali: this.archivio.reduce((s, b) => s + (b.pagine || 0), 0)
+            };
+        }
+    }
 
-    </script>
+    const miaBiblioteca = new GestoreBiblioteca();
+    miaBiblioteca.inserisci({ titolo: "Inferno", autore: "Dante", pagine: 400 });
+    
+    logPage("6. Report Finale Biblioteca", JSON.stringify(miaBiblioteca.generaReport(), null, 2));
+
+</script>
 
 </body>
 </html>
