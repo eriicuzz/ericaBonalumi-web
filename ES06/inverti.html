@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Inverti Cifre</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding-top: 50px; }
+        .box { border: 1px solid #ddd; padding: 20px; border-radius: 10px; background: #f9f9f9; }
+        input, button { padding: 10px; margin: 10px 0; width: 100%; box-sizing: border-box; }
+        #risultato { font-weight: bold; color: green; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h3>Esercizio: Inverti Cifre</h3>
+    <input type="number" id="numeroInput" placeholder="Inserisci un numero intero">
+    <button onclick="eseguiInversione()">Inverti</button>
+    <p id="risultato"></p>
+</div>
+
+<script>
+    function inverti_cifre(numero) {
+        const segno = Math.sign(numero);
+        const invertitoStr = Math.abs(numero).toString().split('').reverse().join('');
+        return Number(invertitoStr) * segno;
+    }
+
+    function eseguiInversione() {
+        const input = document.getElementById('numeroInput').value;
+        const display = document.getElementById('risultato');
+
+        if (input === "") {
+            display.innerText = "Errore: Inserisci un numero";
+            display.style.color = "red";
+            return;
+        }
+
+        const num = parseInt(input);
+        const risultato = inverti_cifre(num);
+        
+        display.style.color = "green";
+        display.innerText = "Risultato: " + risultato;
+    }
+</script>
+
+</body>
+</html>
