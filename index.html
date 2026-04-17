@@ -44,10 +44,55 @@
         h1 { font-size: 2.5rem; color: var(--primary); margin: 0; letter-spacing: -0.5px; }
         .info-student { color: #6c757d; font-size: 1.1rem; margin-top: 10px; font-weight: 500; }
 
-        .section-title {
+        /* Contenitore Griglia Principale */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             width: 100%;
             max-width: 900px;
-            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        /* Card delle Macro-Sezioni */
+        .folder-card {
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .folder-card:hover {
+            transform: translateY(-5px);
+            background: var(--secondary);
+            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+        }
+
+        .folder-card.active {
+            background: var(--accent);
+            color: var(--text);
+        }
+
+        /* Sezioni Esercizi (Nascoste di default) */
+        .exercise-section {
+            display: none;
+            width: 100%;
+            max-width: 900px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
             margin: 40px 0 20px 0;
             font-size: 1.4rem;
             font-weight: 600;
@@ -56,13 +101,11 @@
             padding-left: 15px;
         }
 
-        /* Griglia coerente */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
             width: 100%;
-            max-width: 900px;
         }
 
         .card {
@@ -72,7 +115,7 @@
             text-decoration: none;
             color: var(--text);
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -86,55 +129,23 @@
             border-color: var(--primary);
         }
 
-        /* Colore specifico per sezione Node/ES04 */
-        .node-card:hover {
-            border-color: var(--node-green) !important;
-            box-shadow: 0 15px 30px rgba(95, 160, 78, 0.15) !important;
-        }
-
         .icon { font-size: 2.8rem; margin-bottom: 15px; }
-        
-        /* Testi uniformi nelle card */
-        .card h3 { 
-            margin: 0 0 8px 0; 
-            font-size: 1.2rem; 
-            color: var(--primary); 
-            font-weight: 600; 
-        }
-        
-        .node-card h3 { color: var(--node-green); }
+        .card h3 { margin: 0 0 8px 0; font-size: 1.2rem; color: var(--primary); }
+        .card p { margin: 0; font-size: 0.95rem; color: #6c757d; }
 
-        .card p { 
-            margin: 0; 
-            font-size: 0.95rem; 
-            color: #6c757d; 
-            line-height: 1.4;
-        }
-
-        /* Stile Terminale Uniforme */
         .terminal-box {
             background-color: #1e1e24;
             color: #4cc9f0;
             padding: 10px 12px;
             border-radius: 8px;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: monospace;
             font-size: 0.8rem;
             margin-top: 15px;
             width: 90%;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
             text-align: left;
         }
-        .terminal-prompt { color: var(--node-green); font-weight: bold; margin-right: 5px; }
 
-        footer {
-            margin-top: 60px;
-            padding: 30px;
-            font-size: 0.9rem;
-            color: #888;
-            text-align: center;
-            width: 100%;
-            border-top: 1px solid #e1e4e8;
-        }
+        footer { margin-top: 60px; color: #888; text-align: center; width: 100%; padding: 20px; }
     </style>
 </head>
 <body>
@@ -144,121 +155,81 @@
         <div class="info-student">Classe 4^CI • Anno Scolastico 2025/2026</div>
     </div>
 
-    <div class="section-title">Esercitazione ES02</div>
-    <div class="grid">
-        <a href="ES02/index.html" class="card">
-            <div class="icon">📁</div>
-            <h3>Esercizio 02</h3>
-            <p>Sviluppo Base JavaScript</p>
-        </a>
+    <div class="main-grid">
+        <div class="folder-card" onclick="showSection('es02')">ES02</div>
+        <div class="folder-card" onclick="showSection('es03')">ES03</div>
+        <div class="folder-card" onclick="showSection('es04')">ES04</div>
+        <div class="folder-card" onclick="showSection('es05')">ES05</div>
     </div>
 
-    <div class="section-title">Esercitazione ES03</div>
-    <div class="grid">
-        <a href="ES03/esercizioA.html" class="card">
-            <div class="icon">📦</div>
-            <h3>Esercizio 3A</h3>
-            <p>Calcolo Volume Scatola</p>
-        </a>
-        <a href="ES03/esercizioB.html" class="card">
-            <div class="icon">📈</div>
-            <h3>Esercizio 3B</h3>
-            <p>Analisi della Retta</p>
-        </a>
-        <a href="ES03/esercizioC.html" class="card">
-            <div class="icon">🎓</div>
-            <h3>Esercizio 3C</h3>
-            <p>Gestione Esito Voto</p>
-        </a>
-        <a href="ES03/esercizioD.html" class="card">
-            <div class="icon">🔑</div>
-            <h3>Esercizio 3D</h3>
-            <p>Ambito Let vs Var</p>
-        </a>
+    <div id="es02" class="exercise-section">
+        <div class="section-title">Esercitazione ES02</div>
+        <div class="grid">
+            <a href="ES02/index.html" class="card">
+                <div class="icon">📁</div>
+                <h3>Esercizio 02</h3>
+                <p>Sviluppo Base JavaScript</p>
+            </a>
+        </div>
     </div>
 
-    <div class="section-title" style="color: var(--node-green); border-left-color: var(--node-green);">Esercitazione ES04 (Node.js)</div>
-    <div class="grid">
-        
-        <a href="ES04/esercizio1.txt" target="_blank" class="card node-card">
-            <div class="icon">📝</div>
-            <h3>Esercizio 4A</h3>
-            <p>Script Operazioni Base</p>
-            <div class="terminal-box">
-                <span class="terminal-prompt">$</span>node esercizio1.js
-            </div>
-        </a>
-
-        <a href="ES04/esercizio2.txt" target="_blank" class="card node-card">
-            <div class="icon">💡</div>
-            <h3>Esercizio 4B</h3>
-            <p>Manipolazione Dati</p>
-            <div class="terminal-box">
-                <span class="terminal-prompt">$</span>node esercizio2.js
-            </div>
-        </a>
-
-        <a href="ES04/esercizio3.txt" target="_blank" class="card node-card">
-            <div class="icon">🚀</div>
-            <h3>Esercizio 4C</h3>
-            <p>Logica Condizionale</p>
-            <div class="terminal-box">
-                <span class="terminal-prompt">$</span>node esercizio3.js
-            </div>
-        </a>
-
-        <a href="ES04/calc.html" class="card node-card">
-            <div class="icon">🧮</div>
-            <h3>Esercizio 4D</h3>
-            <p>Interfaccia Calcolatrice</p>
-            <div class="terminal-box">
-                <span class="terminal-prompt">$</span>node calc.js
-            </div>
-        </a>
-        
-        <a href="ES04/loop.txt" target="_blank" class="card node-card">
-            <div class="icon">⏳</div>
-            <h3>Esercizio 4E</h3>
-            <p>Stampa Decrescente 100-0</p>
-            <div class="terminal-box">
-                <span class="terminal-prompt">$</span>node loop.js
-            </div>
-        </a>
-
+    <div id="es03" class="exercise-section">
+        <div class="section-title">Esercitazione ES03</div>
+        <div class="grid">
+            <a href="ES03/esercizioA.html" class="card"><div class="icon">📦</div><h3>3A</h3><p>Volume Scatola</p></a>
+            <a href="ES03/esercizioB.html" class="card"><div class="icon">📈</div><h3>3B</h3><p>Analisi Retta</p></a>
+            <a href="ES03/esercizioC.html" class="card"><div class="icon">🎓</div><h3>3C</h3><p>Esito Voto</p></a>
+            <a href="ES03/esercizioD.html" class="card"><div class="icon">🔑</div><h3>3D</h3><p>Let vs Var</p></a>
+        </div>
     </div>
-<div class="section-title" style="color: var(--node-green); border-left-color: var(--node-green);">Esercitazione ES05</div>
-    <div class="grid">
-        
-        <a href="ES05/persona.html" target="_blank" class="card node-card">
-            <div class="icon">👤</div>
-            <h3>Esercizio 5A</h3>
-            <p>Form & Oggetto Persona</p>
-        </a>
 
-        <a href="ES05/libro.html" target="_blank" class="card node-card">
-            <div class="icon">📖</div>
-            <h3>Esercizio 5B</h3>
-            <p>Ciclo for in Libro</p>
-            <div class="terminal-box">
-                <span class="terminal-prompt">$</span>node libro.js
-            </div>
-        </a>
-<a href="ES05/gestioneBiblioteca.html" target="_blank" class="card node-card">
-    <div class="icon">📚</div>
-    <h3>Esercizio 5C</h3>
-    <p>Biblioteca di Libri (Oggetti e Array)</p>
-    <div class="terminal-box">
-        <span class="terminal-prompt">$</span>node gestioneBiblioteca.js
+    <div id="es04" class="exercise-section">
+        <div class="section-title" style="color: var(--node-green);">Esercitazione ES04 (Node.js)</div>
+        <div class="grid">
+            <a href="ES04/esercizio1.txt" target="_blank" class="card">
+                <div class="icon">📝</div><h3>4A</h3><p>Operazioni Base</p>
+                <div class="terminal-box">node esercizio1.js</div>
+            </a>
+            <a href="ES04/calc.html" class="card">
+                <div class="icon">🧮</div><h3>4D</h3><p>Calcolatrice</p>
+            </a>
+        </div>
     </div>
-</a>
-<a href="ES05/bibliotecaJSON.html" target="_blank" class="card node-card">
-    <div class="icon">💾</div>
-    <h3>Esercizio 5D</h3>
-    <p>JSON e Persistenza Dati (Storage)</p>
-    <div class="terminal-box">
-        <span class="terminal-prompt">$</span>node bibliotecaJSON.js
+
+    <div id="es05" class="exercise-section">
+        <div class="section-title" style="color: var(--node-green);">Esercitazione ES05</div>
+        <div class="grid">
+            <a href="ES05/persona.html" target="_blank" class="card"><div class="icon">👤</div><h3>5A</h3><p>Oggetto Persona</p></a>
+            <a href="ES05/libro.html" target="_blank" class="card"><div class="icon">📖</div><h3>5B</h3><p>Ciclo for in</p></a>
+            <a href="ES05/gestioneBiblioteca.html" target="_blank" class="card"><div class="icon">📚</div><h3>5C</h3><p>Biblioteca</p></a>
+            <a href="ES05/bibliotecaJSON.html" target="_blank" class="card"><div class="icon">💾</div><h3>5D</h3><p>JSON Storage</p></a>
+        </div>
     </div>
-</a>
-    </div>
+
+    <footer>
+        &copy; 2026 Erica Bonalumi - Portfolio Esercitazioni
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Nascondi tutte le sezioni
+            const sections = document.querySelectorAll('.exercise-section');
+            sections.forEach(s => s.style.display = 'none');
+
+            // Rimuovi classe active da tutti i pulsanti
+            const cards = document.querySelectorAll('.folder-card');
+            cards.forEach(c => c.classList.remove('active'));
+
+            // Mostra la sezione cliccata
+            const target = document.getElementById(sectionId);
+            target.style.display = 'block';
+
+            // Aggiungi classe active al pulsante cliccato
+            event.currentTarget.classList.add('active');
+            
+            // Scroll fluido verso la sezione
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
 </body>
 </html>
