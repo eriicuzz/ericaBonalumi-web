@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Calcolatrice Semplice</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; }
+        .calc-card { border: 1px solid #ccc; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input, select, button { margin: 10px 0; display: block; width: 100%; padding: 8px; }
+        #risultato { font-weight: bold; color: blue; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="calc-card">
+    <h3>Calcolatrice JS</h3>
+    <input type="number" id="n1" placeholder="Primo numero">
+    <input type="number" id="n2" placeholder="Secondo numero">
+    <select id="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="**">** (Potenza)</option>
+    </select>
+    <button onclick="calcola()">Calcola</button>
+    <div id="risultato"></div>
+</div>
+
+<script>
+    function calcola() {
+        const n1 = parseFloat(document.getElementById('n1').value);
+        const n2 = parseFloat(document.getElementById('n2').value);
+        const op = document.getElementById('op').value;
+        const display = document.getElementById('risultato');
+
+        if (isNaN(n1) || isNaN(n2)) {
+            display.innerText = "Errore: Inserisci numeri validi";
+            display.style.color = "red";
+            return;
+        }
+
+        let res;
+        switch (op) {
+            case "+": res = n1 + n2; break;
+            case "-": res = n1 - n2; break;
+            case "*": res = n1 * n2; break;
+            case "/": res = n2 !== 0 ? n1 / n2 : "Errore: Div per 0"; break;
+            case "**": res = n1 ** n2; break;
+            default: res = "Errore";
+        }
+
+        display.innerText = "Risultato: " + res;
+        display.style.color = (typeof res === 'string') ? "red" : "blue";
+    }
+</script>
+
+</body>
+</html>
