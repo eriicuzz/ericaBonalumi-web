@@ -4,40 +4,79 @@
     <meta charset="UTF-8">
     <title>Triangolo di Tartaglia</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; }
-        .container { background: white; padding: 20px; border-radius: 8px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            padding: 40px; 
+            background-color: #f0f2f5; 
+            color: #333;
+        }
+        .container { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            display: inline-block; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1); 
+        }
+        h2 { color: #2c3e50; margin-bottom: 20px; }
         pre { 
             font-family: "Courier New", Courier, monospace; 
-            background: #222; 
-            color: #0f0; 
+            background: #ffffff; /* Sfondo bianco */
+            color: #2c3e50;     /* Testo scuro */
             padding: 20px; 
-            border-radius: 5px; 
-            text-align: left; /* Il pre mantiene gli spazi bianchi calcolati */
+            border: 1px solid #e1e4e8;
+            border-radius: 8px; 
+            text-align: left; 
             display: inline-block;
-            line-height: 1.5;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-top: 20px;
         }
-        input { padding: 8px; width: 60px; }
-        button { padding: 8px 15px; cursor: pointer; }
+        input { 
+            padding: 10px; 
+            width: 70px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        button { 
+            padding: 10px 20px; 
+            cursor: pointer; 
+            background-color: #3498db; 
+            color: white; 
+            border: none; 
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #2980b9; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Generatore Triangolo di Tartaglia</h2>
-    <input type="number" id="righe" value="5" min="1" max="20">
-    <button onclick="disegna()">Genera</button>
-    <br><br>
-    <pre id="output">Il triangolo apparirà qui...</pre>
+    <label for="righe">Righe:</label>
+    <input type="number" id="righe" value="7" min="1" max="20">
+    <button onclick="disegna()">Genera Triangolo</button>
+    <br>
+    <pre id="output">Inserisci il numero di righe e clicca su genera.</pre>
 </div>
 
 <script>
     function disegna() {
         const nRighe = parseInt(document.getElementById('righe').value);
         const output = document.getElementById('output');
+        
+        if (isNaN(nRighe) || nRighe < 1) {
+            output.textContent = "Inserire un numero valido.";
+            return;
+        }
+
         let triangolo = [];
         let risultatoTestuale = "";
 
-        // Calcolo
+        // Logica di calcolo
         for (let i = 0; i < nRighe; i++) {
             triangolo[i] = new Array(i + 1);
             for (let j = 0; j < i + 1; j++) {
@@ -45,14 +84,18 @@
             }
         }
 
-        // Formattazione (cellWidth deve essere pari per una centratura perfetta)
+        // Formattazione per la visualizzazione
+        // Aumentiamo cellWidth se prevediamo numeri grandi (es. con 15-20 righe)
         const cellWidth = 6; 
         
         triangolo.forEach((riga, index) => {
+            // Calcolo degli spazi per la centratura
             const paddingIniziale = " ".repeat((nRighe - index - 1) * (cellWidth / 2));
+            
             const numeriRiga = riga
                 .map(n => n.toString().padStart(cellWidth, " "))
                 .join("");
+            
             risultatoTestuale += paddingIniziale + numeriRiga + "\n";
         });
 
