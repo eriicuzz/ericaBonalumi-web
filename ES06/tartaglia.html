@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Triangolo di Tartaglia</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; }
+        .container { background: white; padding: 20px; border-radius: 8px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        pre { 
+            font-family: "Courier New", Courier, monospace; 
+            background: #222; 
+            color: #0f0; 
+            padding: 20px; 
+            border-radius: 5px; 
+            text-align: left; /* Il pre mantiene gli spazi bianchi calcolati */
+            display: inline-block;
+            line-height: 1.5;
+        }
+        input { padding: 8px; width: 60px; }
+        button { padding: 8px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Generatore Triangolo di Tartaglia</h2>
+    <input type="number" id="righe" value="5" min="1" max="20">
+    <button onclick="disegna()">Genera</button>
+    <br><br>
+    <pre id="output">Il triangolo apparirà qui...</pre>
+</div>
+
+<script>
+    function disegna() {
+        const nRighe = parseInt(document.getElementById('righe').value);
+        const output = document.getElementById('output');
+        let triangolo = [];
+        let risultatoTestuale = "";
+
+        // Calcolo
+        for (let i = 0; i < nRighe; i++) {
+            triangolo[i] = new Array(i + 1);
+            for (let j = 0; j < i + 1; j++) {
+                triangolo[i][j] = (j === 0 || j === i) ? 1 : triangolo[i-1][j-1] + triangolo[i-1][j];
+            }
+        }
+
+        // Formattazione (cellWidth deve essere pari per una centratura perfetta)
+        const cellWidth = 6; 
+        
+        triangolo.forEach((riga, index) => {
+            const paddingIniziale = " ".repeat((nRighe - index - 1) * (cellWidth / 2));
+            const numeriRiga = riga
+                .map(n => n.toString().padStart(cellWidth, " "))
+                .join("");
+            risultatoTestuale += paddingIniziale + numeriRiga + "\n";
+        });
+
+        output.textContent = risultatoTestuale;
+    }
+</script>
+
+</body>
+</html>
