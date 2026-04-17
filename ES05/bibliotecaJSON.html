@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ES04 - JSON Biblioteca</title>
+</head>
+<body>
+
+    <h1>Esercitazione 04: JSON e Storage</h1>
+    
+    <p>Guarda i risultati qui sotto:</p>
+    <hr>
+
+    <pre id="risultati" style="background: #eee; padding: 15px;"></pre>
+
+    <script>
+        const display = document.getElementById('risultati');
+
+        // 1. DATI DI ESEMPIO
+        const libroEsempio = { titolo: "Esempio", autore: "Autore", anno: 2024, pagine: 100 };
+        const jsonLibro = '{"titolo":"Don Chisciotte","autore":"Cervantes","anno":1605}';
+        const utente = { nome: "Mario", psw: "segreta123" };
+
+        // 2. SERIALIZZAZIONE (Oggetto -> JSON)
+        // Usiamo un filtro per non salvare la password (psw)
+        const utenteJSON = JSON.stringify(utente, (key, value) => {
+            if (key === "psw") return undefined;
+            return value;
+        });
+
+        // 3. DESERIALIZZAZIONE (JSON -> Oggetto)
+        const libroDati = JSON.parse(jsonLibro);
+
+        // 4. CLASSE BIBLIOTECA SEMPLICE
+        class Biblioteca {
+            constructor() {
+                this.libri = [];
+            }
+            aggiungi(titolo, pag) {
+                this.libri.push({ titolo: titolo, pagine: pag });
+            }
+            totalePagine() {
+                return this.libri.reduce((somma, l) => somma + l.pagine, 0);
+            }
+        }
+
+        // Test finale
+        const miaBiblio = new Biblioteca();
+        miaBiblio.aggiungi("Inferno", 400);
+        miaBiblio.aggiungi("1984", 328);
+
+        // STAMPA A VIDEO
+        display.innerHTML = 
+            "1. Oggetto utente senza password: " + utenteJSON + "\n\n" +
+            "2. Libro recuperato da JSON: " + libroDati.titolo + "\n\n" +
+            "3. Totale libri in biblioteca: " + miaBiblio.libri.length + "\n" +
+            "4. Somma totale pagine: " + miaBiblio.totalePagine();
+
+    </script>
+
+</body>
+</html>
