@@ -1,114 +1,65 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esercitazione 04 - JSON e Storage</title>
-    <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; padding: 20px; color: #333; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 10px; }
-        .output { background: #202124; color: #34d399; padding: 15px; border-radius: 8px; font-family: monospace; white-space: pre-wrap; margin-top: 20px; overflow-x: auto; }
-        .label { color: #818cf8; font-weight: bold; }
-    </style>
+    <title>Esercizio 04 - JSON</title>
 </head>
 <body>
 
-<div class="container">
-    <h1>ES04: Gestione JSON e Biblioteca</h1>
-    <p>I risultati dell'esecuzione del codice JavaScript sono mostrati nel riquadro sottostante:</p>
-
-    <div id="log-output" class="output"></div>
-</div>
-
-<script>
-    // Helper per scrivere i risultati sulla pagina
-    const outputDiv = document.getElementById('log-output');
-    function logPage(label, content) {
-        outputDiv.innerHTML += `<span class="label">>> ${label}</span>\n${content}\n\n`;
-    }
-
-    // --- DATI DI SUPPORTO ---
-    const libroCompleto = { titolo: "Esempio", autore: "Autore", anno: 2024, isbn: "123", pagine: 100 };
-    const jsonString = '{"titolo":"Don Chisciotte","autore":"Cervantes","anno":1605}';
-    const arrayJSON = '[{"titolo":"Libro 1"},{"titolo":"Libro 2"}]';
-    const jsonNonValido = '{"titolo": "Errore" , }'; 
-    const prestitoJSON = '{"libro":"1984","data":"2024-04-16T10:00:00Z"}';
-    const bibliotecaOriginale = { nome: "Civica", indirizzo: { città: "Milano" } };
-
-    // --- PARTE 1: SERIALIZZAZIONE ---
-    const operaLibro = { titolo: "Il Nome della Rosa", scrittore: "Umberto Eco", pubblicazione: 1980 };
-    const stringaJSON = JSON.stringify(operaLibro);
-    logPage("1.1 JSON semplice", stringaJSON);
-
-    const datiEssenziali = JSON.stringify(libroCompleto, ["titolo", "autore", "anno"]);
-    logPage("1.3 Filtrato (Titolo, Autore, Anno)", datiEssenziali);
-
-    // --- PARTE 2: DESERIALIZZAZIONE ---
-    const libroConvertito = JSON.parse(jsonString);
-    logPage("2.1 Da stringa a oggetto", `Titolo: ${libroConvertito.titolo}`);
-
-    try {
-        const checkJSON = JSON.parse(jsonNonValido);
-    } catch (err) {
-        logPage("2.3 Errore catturato correttamente", err.message);
-    }
-
-    // --- PARTE 3: REPLACER E REVIVER ---
-    const profiloUtente = { user: "MarioRossi", psw: "segreto" };
-    const filtroPrivacy = (key, value) => (key === "psw" || key === "password") ? undefined : value;
-    const utentePrivato = JSON.stringify(profiloUtente, filtroPrivacy);
-    logPage("3.1 Utente (senza password)", utentePrivato);
-
-    const ripristinaDate = (key, val) => {
-        if (typeof val === "string" && val.length > 15 && !isNaN(Date.parse(val))) {
-            return new Date(val);
-        }
-        return val;
-    };
-    const prestitoFinale = JSON.parse(prestitoJSON, ripristinaDate);
-    logPage("3.3 Data convertita?", `È un oggetto Date? ${prestitoFinale.data instanceof Date}`);
-
-    // --- PARTE 5: SIMULAZIONE STORAGE ---
-    const databaseLocale = (function() {
-        const memoria = {};
-        return {
-            salva: (key, val) => { memoria[key] = JSON.stringify(val); },
-            carica: (key) => {
-                const item = memoria[key];
-                return item ? JSON.parse(item) : null;
-            }
-        };
-    })();
-
-    // --- PARTE 6: CLASSE BIBLIOTECA ---
-    class GestoreBiblioteca {
-        constructor(nomeChiave = "my_app_data") {
-            this.chiave = nomeChiave;
-            this.archivio = this.inizializza();
-        }
-        inizializza() {
-            const salvataggio = databaseLocale.carica(this.chiave);
-            return salvataggio ? salvataggio : [];
-        }
-        inserisci(libro) {
-            this.archivio.push(libro);
-            databaseLocale.salva(this.chiave, this.archivio);
-        }
-        generaReport() {
-            return {
-                totaleLibri: this.archivio.length,
-                pagineTotali: this.archivio.reduce((s, b) => s + (b.pagine || 0), 0)
-            };
-        }
-    }
-
-    const miaBiblioteca = new GestoreBiblioteca();
-    miaBiblioteca.inserisci({ titolo: "Inferno", autore: "Dante", pagine: 400 });
+    <h1>Esercitazione 04: JSON e Biblioteca</h1>
     
-    logPage("6. Report Finale Biblioteca", JSON.stringify(miaBiblioteca.generaReport(), null, 2));
+    <div id="spazio-testo"></div>
 
-</script>
+    <script>
+        // Funzione per scrivere sulla pagina in modo semplice
+        const area = document.getElementById('spazio-testo');
+        function scrivi(testo) {
+            area.innerHTML += testo + "<br><br>";
+        }
+
+        // --- DATI DI PARTENZA ---
+        const libroDati = { titolo: "Il Nome della Rosa", autore: "Umberto Eco", anno: 1980 };
+        const stringaDaLeggere = '{"titolo":"Don Chisciotte","autore":"Cervantes","anno":1605}';
+        const utente = { nome: "Mario", psw: "segreto123" };
+
+        // --- 1. TRASFORMARE IN JSON (Stringify) ---
+        // Creiamo il JSON escludendo la password per sicurezza
+        const utenteInTesto = JSON.stringify(utente, (chiave, valore) => {
+            if (chiave === "psw") return undefined;
+            return valore;
+        });
+        scrivi("1. Utente convertito in testo (senza password): " + utenteInTesto);
+
+        // --- 2. LEGGERE UN JSON (Parse) ---
+        const libroOggetto = JSON.parse(stringaDaLeggere);
+        scrivi("2. Titolo del libro letto dal JSON: " + libroOggetto.titolo);
+
+        // --- 3. GESTIONE ERRORI ---
+        try {
+            JSON.parse('{"errore": }'); // JSON scritto male apposta
+        } catch (errore) {
+            scrivi("3. Errore catturato: il JSON non era scritto bene.");
+        }
+
+        // --- 4. CLASSE BIBLIOTECA ---
+        class Biblioteca {
+            constructor() {
+                this.lista = [];
+            }
+            aggiungi(titoloLibro, numPagine) {
+                this.lista.push({ titolo: titoloLibro, pagine: numPagine });
+            }
+            contaLibri() {
+                return this.lista.length;
+            }
+        }
+
+        // Creiamo la biblioteca e aggiungiamo un libro
+        const miaBiblio = new Biblioteca();
+        miaBiblio.aggiungi("Inferno", 400);
+
+        scrivi("4. Numero libri in biblioteca: " + miaBiblio.contaLibri());
+
+    </script>
 
 </body>
 </html>
