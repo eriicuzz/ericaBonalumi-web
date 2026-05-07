@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <button id="btn1">Pulsante Uno</button>
+    <button id="btn2">Pulsante Due</button>
+
+    <script>
+        // Selezione tramite ID come da esempio teoria
+        let primoBottone = document.getElementById("btn1");
+        let secondoBottone = document.getElementById("btn2");
+
+        // Modifica degli stili usando setAttribute (Attribute Node)
+        // Usiamo l'attributo style per cambiare colore e sfondo
+        primoBottone.setAttribute("style", "background-color: green; color: white;");
+        secondoBottone.setAttribute("style", "background-color: yellow; color: black;");
+
+        // Modifica del contenuto testuale (Text Node)
+        primoBottone.textContent = "OK - Verde";
+        secondoBottone.textContent = "ATTENZIONE - Giallo";
+    </script>
+</body>
+</html>
