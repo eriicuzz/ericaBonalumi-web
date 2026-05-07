@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Proprietà Navigator Base</title>
+</head>
+<body>
+
+    <h1>Informazioni sul Browser</h1>
+    <div id="risultato"></div>
+
+    <script>
+        // 1. Selezione del contenitore (comando base)
+        let contenitore = document.getElementById("risultato");
+
+        // 2. Funzione base per creare e aggiungere i nodi
+        function mostraDato(nome, valore) {
+            // Creazione elemento paragrafo
+            let p = document.createElement("p");
+
+            // Creazione nodo di testo (Nome Proprietà: Valore)
+            let testo = document.createTextNode(nome + ": " + valore);
+
+            // Aggiunta del testo al paragrafo
+            p.appendChild(testo);
+
+            // Aggiunta del paragrafo al div principale
+            contenitore.appendChild(p);
+        }
+
+        // 3. Utilizzo delle proprietà dell'oggetto navigator (dalla tua teoria)
+        mostraDato("User Agent", navigator.userAgent);
+        mostraDato("Piattaforma", navigator.platform);
+        mostraDato("Lingua", navigator.language);
+        mostraDato("Cookie Abilitati", navigator.cookieEnabled);
+        mostraDato("Online", navigator.onLine);
+        mostraDato("Vendor", navigator.vendor);
+    </script>
+
+</body>
+</html>
