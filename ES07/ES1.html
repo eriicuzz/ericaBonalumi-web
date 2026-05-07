@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi DOM, Window e Navigator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+            color: #333;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 20px; }
+        .dato { 
+            background: #f8f9fa; 
+            margin: 8px 0; 
+            padding: 10px; 
+            border-left: 4px solid #3498db;
+            word-wrap: break-word;
+        }
+        b { color: #e67e22; }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="main-container">
+        <h1>Proprietà dell'Oggetto Window</h1>
+        <p>Questo script utilizza il <b>DOM</b> per visualizzare le proprietà del <b>BOM</b>.</p>
+        
+        <div id="display-area">
+            </div>
+    </div>
+
+    <script>
+        // --- 1. SELEZIONE DEGLI ELEMENTI (DOM Selection) ---
+        const displayArea = document.querySelector('#display-area');
+
+        // --- 2. FUNZIONE PER CREARE NODI (DOM Manipulation) ---
+        function aggiungiProprieta(titolo, valore) {
+            // Creazione Element Node (un div per raggruppare)
+            const divDato = document.createElement('div');
+            divDato.setAttribute('class', 'dato');
+
+            // Creazione del grassetto (Element Node)
+            const b = document.createElement('b');
+            b.textContent = titolo + ": ";
+
+            // Creazione del testo del valore (Text Node)
+            const testoValore = document.createTextNode(valore);
+
+            // Assemblaggio dei nodi (appendChild)
+            divDato.appendChild(b);
+            divDato.appendChild(testoValore);
+
+            // Aggiunta al contenitore principale nel DOM
+            displayArea.appendChild(divDato);
+        }
+
+        // --- 3. ESTRAZIONE DATI DALL'OGGETTO WINDOW ---
+        
+        // Proprietà Window
+        aggiungiProprieta("Risoluzione Finestra", window.innerWidth + "x" + window.innerHeight);
+        aggiungiProprieta("URL Corrente", window.location.href);
+        aggiungiProprieta("Protocollo", window.location.protocol);
+
+        // Creiamo un sottotitolo dinamicamente
+        const subTitle = document.createElement('h2');
+        subTitle.textContent = "Dettagli Navigator (Browser)";
+        displayArea.appendChild(subTitle);
+
+        // Proprietà Navigator
+        aggiungiProprieta("User Agent", navigator.userAgent);
+        aggiungiProprieta("Piattaforma", navigator.platform);
+        aggiungiProprieta("Lingua", navigator.language);
+        aggiungiProprieta("Cookie Abilitati", navigator.cookieEnabled ? "Sì" : "No");
+        aggiungiProprieta("Stato Online", navigator.onLine ? "Connesso" : "Disconnesso");
+        aggiungiProprieta("Vendor", navigator.vendor);
+
+        // --- 4. ESEMPIO DI METODO WINDOW ---
+        // window.confirm("I dati del browser sono stati caricati correttamente?");
+    </script>
+</body>
+</html>
