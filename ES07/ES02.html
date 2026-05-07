@@ -1,28 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esercizio 2 - Navigator</title>
+</head>
 <body>
+
+    <h1>Oggetto Navigator, per vedere fai F12</h1>
     <div id="info-nav"></div>
 
     <script>
+        // 1. Messaggio popup informativo
+        window.alert("Stai visualizzando le informazioni del tuo Browser!");
+
+        // 2. Selezione del contenitore tramite ID
         let areaNav = document.getElementById("info-nav");
 
-        // Creazione Element Node
+        // 3. Stampa dei dati navigator in console (F12)
+        console.log("User Agent:", navigator.userAgent);
+        console.log("Piattaforma:", navigator.platform);
+        console.log("Lingua:", navigator.language);
+        console.log("Cookie Abilitati:", navigator.cookieEnabled);
+
+        // 4. Creazione dinamica degli elementi (Element Node)
         let par = document.createElement("p");
         
-        // Impostazione Attributo (Attribute Node)
+        // 5. Impostazione Attributo (Attribute Node)
         par.setAttribute("class", "info-browser");
 
-        // Creazione Text Nodes con le proprietà navigator della teoria
+        // 6. Creazione dei nodi di testo (Text Nodes)
         let ua = document.createTextNode("UserAgent: " + navigator.userAgent);
-        let plat = document.createTextNode(" - Piattaforma: " + navigator.platform);
-        let lang = document.createTextNode(" - Lingua: " + navigator.language);
+        let plat = document.createTextNode(" | Piattaforma: " + navigator.platform);
+        let lang = document.createTextNode(" | Lingua: " + navigator.language);
+        let cook = document.createTextNode(" | Cookie: " + (navigator.cookieEnabled ? "Sì" : "No"));
 
-        // Assemblaggio con appendChild
+        // 7. Assemblaggio con appendChild
         par.appendChild(ua);
         par.appendChild(plat);
         par.appendChild(lang);
+        par.appendChild(cook);
 
-        // Aggiunta al DOM
+        // 8. Aggiunta al DOM
         areaNav.appendChild(par);
     </script>
 </body>
