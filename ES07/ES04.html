@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input type="text" id="miaCasella" value="testo da convertire">
+    <button id="btnConverti">Converti in Maiuscolo</button>
+
+    <script>
+        // 1. Selezione degli elementi tramite ID
+let casella = document.getElementById("miaCasella");
+        let pulsante = document.getElementById("btnConverti");
+
+        // 2. Modifica del valore (Manipolazione Element Node)
+        // Quando si clicca sul pulsante, il valore della casella cambia
+        pulsante.onclick = function() {
+            // Prendiamo il valore attuale e lo convertiamo
+            let testoOriginale = casella.value;
+            casella.value = testoOriginale.toUpperCase();
+            
+            // 3. Modifica dello stile per enfasi (Attribute Node tramite setAttribute)
+            casella.setAttribute("style", "text-transform: uppercase; font-weight: bold;");
+        };
+    </script>
+
+</body>
+</html>
