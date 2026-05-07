@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="box-window"></div>
+
+    <script>
+        let contenitore = document.getElementById("box-window");
+
+        // Creazione elemento paragrafo
+        let p = document.createElement("p");
+
+        // Creazione nodi di testo con le proprietà window della teoria
+        let testoDimensioni = document.createTextNode("Dimensioni: " + window.innerWidth + "x" + window.innerHeight);
+        let testoUrl = document.createTextNode(" URL: " + window.location.href);
+
+        // Aggiunta dei nodi di testo al paragrafo
+        p.appendChild(testoDimensioni);
+        p.appendChild(testoUrl);
+
+        // Aggiunta del paragrafo al corpo della pagina
+        document.body.appendChild(p);
+    </script>
+</body>
+</html>
