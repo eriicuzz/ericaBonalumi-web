@@ -27,8 +27,8 @@
             contenitore.appendChild(p);
         }
 
-        // 3. Utilizzo delle proprietà dell'oggetto navigator (dalla tua teoria)
-        mostraDato("User Agent", navigator.userAgent);
+        // 3. Utilizzo delle propriet        
+mostraDato("User Agent", navigator.userAgent);
         mostraDato("Piattaforma", navigator.platform);
         mostraDato("Lingua", navigator.language);
         mostraDato("Cookie Abilitati", navigator.cookieEnabled);
