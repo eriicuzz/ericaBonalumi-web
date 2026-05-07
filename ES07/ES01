@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Esercizio Navigator e DOM</title>
+</head>
+<body>
+
+    <h1>Proprietà dell'oggetto Navigator</h1>
+
+    <script>
+        // --- CREAZIONE ELEMENTO (Dalla tua teoria: document.createElement) ---
+        let nuovoParagrafo = document.createElement('p');
+
+        // --- IMPOSTAZIONE ATTRIBUTO (Dalla tua teoria: setAttribute) ---
+        nuovoParagrafo.setAttribute('class', 'mioClasse');
+
+        // --- CREAZIONE TESTO E NODI (Dalla tua teoria: createTextNode e appendChild) ---
+        
+        // 1. User Agent
+        let testo1 = document.createTextNode("User Agent: " + navigator.userAgent);
+        nuovoParagrafo.appendChild(testo1);
+        nuovoParagrafo.appendChild(document.createElement('br')); // Va a capo
+
+        // 2. Piattaforma
+        let testo2 = document.createTextNode("Piattaforma: " + navigator.platform);
+        nuovoParagrafo.appendChild(testo2);
+        nuovoParagrafo.appendChild(document.createElement('br'));
+
+        // 3. Lingua
+        let testo3 = document.createTextNode("Lingua: " + navigator.language);
+        nuovoParagrafo.appendChild(testo3);
+        nuovoParagrafo.appendChild(document.createElement('br'));
+
+        // 4. Cookie Abilitati
+        let testo4 = document.createTextNode("Cookie Abilitati: " + navigator.cookieEnabled);
+        nuovoParagrafo.appendChild(testo4);
+        nuovoParagrafo.appendChild(document.createElement('br'));
+
+        // 5. Stato Online
+        let testo5 = document.createTextNode("Online: " + navigator.onLine);
+        nuovoParagrafo.appendChild(testo5);
+
+        // --- AGGIUNTA AL CORPO DELLA PAGINA (Dalla tua teoria: document.body.appendChild) ---
+        document.body.appendChild(nuovoParagrafo);
+    </script>
+
+</body>
+</html>
