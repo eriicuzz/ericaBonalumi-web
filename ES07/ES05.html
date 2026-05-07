@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tavola Pitagorica Dinamica</title>
+    <style>
+        table { border-collapse: collapse; margin-top: 20px; }
+        td { border: 1px solid black; padding: 10px; text-align: center; width: 30px; }
+    </style>
+</head>
+<body>
+
+    <h1>Tavola Pitagorica 10x10</h1>
+    <div id="contenitore-tabella"></div>
+
+    <script>
+        // 1. Selezione del contenitore
+        let contenitore = document.getElementById("contenitore-tabella");
+
+        // 2. Creazione dell'elemento tabella
+        let tabella = document.createElement("table");
+
+        // 3. Ciclo per le 10 righe
+        for (let i = 1; i <= 10; i++) {
+            let riga = document.createElement("tr");
+
+            // 4. Ciclo per le 10 colonne
+            for (let j = 1; j <= 10; j++) {
+                let cella = document.createElement("td");
+                
+                // Calcolo del prodotto e creazione del nodo di testo
+                let prodotto = i * j;
+                let testoCella = document.createTextNode(prodotto);
+                
+                // Assemblaggio cella -> riga
+                cella.appendChild(testoCella);
+                riga.appendChild(cella);
+            }
+
+            // Assemblaggio riga -> tabella
+            tabella.appendChild(riga);
+        }
+
+        // 5. Aggiunta della tabella completa al contenitore nel DOM
+        contenitore.appendChild(tabella);
+    </script>
+
+</body>
+</html>
