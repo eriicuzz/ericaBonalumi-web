@@ -1,24 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esercizio 1 - Window</title>
+</head>
 <body>
+
+    <h1>Oggetto Window, per vedere fai F12</h1>
     <div id="box-window"></div>
 
     <script>
+        // 1. Mostro il messaggio popup iniziale
+        window.alert("Benvenuto nella pagina Window!");
+
+        // 2. Selezione del contenitore tramite ID
         let contenitore = document.getElementById("box-window");
 
-        // Creazione elemento paragrafo
-        let p = document.createElement("p");
+        // 3. Stampa dei dati in console (come nel modello)
+        console.log("Larghezza:", window.innerWidth);
+        console.log("Altezza:", window.innerHeight);
+        console.log("URL:", window.location.href);
 
-        // Creazione nodi di testo con le proprietà window della teoria
+        // 4. Creazione dinamica dei nodi nel DOM
+let p = document.createElement("p");
+
         let testoDimensioni = document.createTextNode("Dimensioni: " + window.innerWidth + "x" + window.innerHeight);
-        let testoUrl = document.createTextNode(" URL: " + window.location.href);
+        let spazio = document.createTextNode(" | ");
+        let testoUrl = document.createTextNode("URL: " + window.location.href);
 
-        // Aggiunta dei nodi di testo al paragrafo
+        // 5. Assemblaggio dei nodi
         p.appendChild(testoDimensioni);
+        p.appendChild(spazio);
         p.appendChild(testoUrl);
 
-        // Aggiunta del paragrafo al corpo della pagina
+        // 6. Aggiunta al corpo della pagina
         document.body.appendChild(p);
     </script>
+
 </body>
 </html>
