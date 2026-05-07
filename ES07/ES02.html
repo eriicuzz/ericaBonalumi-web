@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="info-nav"></div>
+
+    <script>
+        let areaNav = document.getElementById("info-nav");
+
+        // Creazione Element Node
+        let par = document.createElement("p");
+        
+        // Impostazione Attributo (Attribute Node)
+        par.setAttribute("class", "info-browser");
+
+        // Creazione Text Nodes con le proprietà navigator della teoria
+        let ua = document.createTextNode("UserAgent: " + navigator.userAgent);
+        let plat = document.createTextNode(" - Piattaforma: " + navigator.platform);
+        let lang = document.createTextNode(" - Lingua: " + navigator.language);
+
+        // Assemblaggio con appendChild
+        par.appendChild(ua);
+        par.appendChild(plat);
+        par.appendChild(lang);
+
+        // Aggiunta al DOM
+        areaNav.appendChild(par);
+    </script>
+</body>
+</html>
