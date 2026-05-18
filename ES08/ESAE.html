@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esercizio 5 - Eventi Semplici</title>
+</head>
+<body>
+
+    <h1>Gestione Eventi e Callback</h1>
+
+    <p>
+        Codice Fiscale: 
+        <input type="text" id="codice_fiscale">
+    </p>
+
+    <p>
+        Password: 
+        <input type="password" id="password">
+    </p>
+
+    <p>
+        Ripeti Password: 
+        <input type="password" id="ripetipassword">
+        <span id="errore-password" style="color: red; display: none;"> Le password non corrispondono!</span>
+    </p>
+
+    <button id="myButton">Pulsante Uno</button>
+    
+    <p id="testo-da-nascondere">Questo testo sparirà al click del pulsante.</p>
+
+    <script>
+        // 1. SELEZIONE DEGLI ELEMENTI
+        let bottone = document.getElementById("myButton");
+        let testo = document.getElementById("testo-da-nascondere");
+        let cf = document.getElementById("codice_fiscale");
+        let pass = document.getElementById("password");
+        let ripetiPass = document.getElementById("ripetipassword");
+        let errore = document.getElementById("errore-password");
+
+        // 2. CAMBIO COLORE PULSANTE AL PASSAGGIO DEL MOUSE (mouseover / mouseout)
+        bottone.addEventListener("mouseover", function() {
+            this.style.backgroundColor = "lightcoral";
+            this.style.color = "white";
+        });
+
+        bottone.addEventListener("mouseout", function() {
+            this.style.backgroundColor = "";
+            this.style.color = "";
+        });
+
+        // 3. CONVERTI IN MAIUSCOLO DURANTE LA DIGITAZIONE (input)
+        cf.addEventListener("input", function() {
+            this.value = this.value.toUpperCase();
+        });
+
+        // 4. CAMBIO SFONDO CAMPI DI TESTO AL FOCUS E BLUR
+        cf.addEventListener("focus", function() { this.style.backgroundColor = "yellow"; });
+        cf.addEventListener("blur", function() { this.style.backgroundColor = ""; });
+
+        pass.addEventListener("focus", function() { this.style.backgroundColor = "yellow"; });
+        pass.addEventListener("blur", function() { this.style.backgroundColor = ""; });
+
+        ripetiPass.addEventListener("focus", function() { this.style.backgroundColor = "yellow"; });
+        ripetiPass.addEventListener("blur", function() { this.style.backgroundColor = ""; });
+
+        // 5. NASCONDERE IL TESTO AL CLICK (hidden = true)
+        bottone.addEventListener("click", function() {
+            testo.hidden = true;
+        });
+
+        // 6. CONTROLLO CORRISPONDENZA PASSWORD (input)
+        ripetiPass.addEventListener("input", function() {
+            if (this.value !== pass.value) {
+                errore.style.display = "inline"; // Mostra l'errore
+            } else {
+                errore.style.display = "none";   // Nasconde l'errore
+            }
+        });
+
+        // 7. CAMBIO COLORE SFONDO PASSWORD IN BASE AI REQUISITI
+        pass.addEventListener("input", function() {
+            if (this.value.length < 8) {
+                this.style.backgroundColor = "red";   // Non rispetta i requisiti
+            } else {
+                this.style.backgroundColor = "green"; // Rispetta i requisiti (8+ caratteri)
+            }
+        });
+    </script>
+
+</body>
+</html>
