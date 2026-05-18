@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esercizio 6 - Gestione Eventi e Stringhe</title>
+</head>
+<body>
+
+    <h1>Nuovo Blocco Esercitazione (ES07)</h1>
+
+    <h3>1. Messaggio al Click</h3>
+    <button id="btn-messaggio">Visualizza Messaggio</button>
+    <p id="output">In attesa del click...</p>
+
+    <hr>
+
+    <h3>2. Verifica Password</h3>
+    <p>Vecchia Password: <input type="text" id="vecchia-password" value="PasswordVecchia123!"></p>
+    <p>Nuova Password: <input type="password" id="nuova-password"></p>
+    
+    <p>Forza della password:</p>
+    <progress id="forza-bar" value="0" max="100" style="width: 100%; height: 20px;"></progress>
+    
+    <p id="output-password" style="font-weight: bold;"></p>
+
+    <hr>
+
+    <h3>3. Generatore Email Automatico</h3>
+    <p>Nome: <input type="text" id="nome"></p>
+    <p>Cognome: <input type="text" id="cognome"></p>
+    <p>Email Generata: <input type="text" id="email-risultato" readonly style="width: 250px;"></p>
+
+    <script>
+        // ELEMENTI DOM 
+        let btnMessaggio = document.getElementById("btn-messaggio");
+        let outputSemplice = document.getElementById("output");
+
+        let vecchiaPass = document.getElementById("vecchia-password");
+        let nuovaPass = document.getElementById("nuova-password");
+        let barraForza = document.getElementById("forza-bar");
+        let outputPassword = document.getElementById("output-password");
+
+        let campoNome = document.getElementById("nome");
+        let campoCognome = document.getElementById("cognome");
+        let campoEmail = document.getElementById("email-risultato");
+
+
+        // VISUALIZZARE MESSAGGIO AL CLICK IN "OUTPUT" 
+        btnMessaggio.addEventListener("click", function() {
+            outputSemplice.textContent = "Il pulsante è stato premuto con successo!";
+        });
+
+
+        // GESTIONE PASSWORD 
+        // Usiamo l'evento 'change' (si attiva quando si sposta il focus fuori dalla casella dopo aver scritto)
+        nuovaPass.addEventListener("change", function() {
+            let valore = this.value;
+            let punteggio = 0;
+
+            // Controllo parametri per il punteggio
+            if (valore.length >= 8) punteggio += 20;                     // Lunghezza
+            if (/[A-Z]/.test(valore)) punteggio += 20;                   // Presenza Maiuscola
+            if (/[a-z]/.test(valore)) punteggio += 20;                   // Presenza Minuscola
+            if (/[0-9]/.test(valore)) punteggio += 20;                   // Presenza Numero
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(valore)) punteggio += 20;  // Presenza Carattere Speciale
+
+            // Aggiorna il valore
+            barraForza.value = punteggio;
+
+            // Controllo Somiglianza (Verifica se la nuova contiene parti della vecchia)
+            let testoVecchia = vecchiaPass.value;
+            let sonoSimili = false;
+            if (testoVecchia !== "" && valore.includes(testoVecchia.substring(0, 4))) {
+                sonoSimili = true;
+            }
+
+            // Mostra i risultati nell'output della password
+            if (sonoSimili) {
+                outputPassword.textContent = "Errore: La nuova password è troppo simile alla precedente!";
+                outputPassword.style.color = "orange";
+            } else if (punteggio === 100) {
+                outputPassword.textContent = "Tutti i requisiti sono stati superati! Password Sicura.";
+                outputPassword.style.color = "green";
+            } else {
+                outputPassword.textContent = "Requisiti non completati. Punteggio forza: " + punteggio + "/100";
+                outputPassword.style.color = "red";
+            }
+        });
+
+
+        // --- 3. COMPORRE EMAIL IN MINUSCOLO CON EVENTO CHANGE ---
+        function generaEmail() {
+            let nomeFiltra = campoNome.value.trim();
+            let cognomeFiltra = campoCognome.value.trim();
+
+            if (nomeFiltra !== "" && cognomeFiltra !== "") {
+                // Compone l'indirizzo nel formato richiesto
+                let indirizzoCompleto = nomeFiltra + "." + cognomeFiltra + "@dominio.it";
+                
+                // Converte tutto l'indirizzo in minuscolo e lo scrive nella terza casella
+                campoEmail.value = indirizzoCompleto.toLowerCase();
+            }
+        }
+
+        // Colleghiamo l'evento 'change' a entrambe le caselle di testo
+        campoNome.addEventListener("change", generaEmail);
+        campoCognome.addEventListener("change", generaEmail);
+
+    </script>
+
+</body>
+</html>
