@@ -14,6 +14,7 @@
             --text: #2b2d42;
             --accent: #4cc9f0;
             --node-green: #5FA04E; 
+            --archive-bg: #6c757d;
         }
 
         body {
@@ -44,10 +45,22 @@
         h1 { font-size: 2.5rem; color: var(--primary); margin: 0; letter-spacing: -0.5px; }
         .info-student { color: #6c757d; font-size: 1.1rem; margin-top: 10px; font-weight: 500; }
 
+        /* Titoli Sezioni */
+        .year-header {
+            width: 100%;
+            max-width: 900px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 20px 0 10px 0;
+            color: var(--secondary);
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
         /* Contenitore Griglia Principale */
         .main-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 20px;
             width: 100%;
             max-width: 900px;
@@ -58,14 +71,14 @@
         .folder-card {
             background: var(--primary);
             color: white;
-            padding: 40px 20px;
+            padding: 30px 15px;
             border-radius: 16px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
 
         .folder-card:hover {
@@ -77,6 +90,15 @@
         .folder-card.active {
             background: var(--accent);
             color: var(--text);
+        }
+
+        .folder-card.archive {
+            background: var(--archive-bg);
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        }
+
+        .folder-card.archive:hover {
+            background: #495057;
         }
 
         /* Sezioni Esercizi (Nascoste di default) */
@@ -93,7 +115,7 @@
         }
 
         .section-title {
-            margin: 40px 0 20px 0;
+            margin: 30px 0 20px 0;
             font-size: 1.4rem;
             font-weight: 600;
             color: var(--secondary);
@@ -103,14 +125,14 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
             width: 100%;
         }
 
         .card {
             background: var(--card-bg);
-            padding: 30px 20px;
+            padding: 25px 20px;
             border-radius: 16px;
             text-decoration: none;
             color: var(--text);
@@ -124,26 +146,14 @@
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(67, 97, 238, 0.12);
             border-color: var(--primary);
         }
 
-        .icon { font-size: 2.8rem; margin-bottom: 15px; }
-        .card h3 { margin: 0 0 8px 0; font-size: 1.2rem; color: var(--primary); }
-        .card p { margin: 0; font-size: 0.95rem; color: #6c757d; }
-
-        .terminal-box {
-            background-color: #1e1e24;
-            color: #4cc9f0;
-            padding: 10px 12px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            margin-top: 15px;
-            width: 90%;
-            text-align: left;
-        }
+        .icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .card h3 { margin: 0 0 8px 0; font-size: 1.1rem; color: var(--primary); }
+        .card p { margin: 0; font-size: 0.9rem; color: #6c757d; }
 
         footer { margin-top: 60px; color: #888; text-align: center; width: 100%; padding: 20px; }
     </style>
@@ -152,21 +162,40 @@
 
     <div class="header">
         <h1>Erica Bonalumi</h1>
-        <div class="info-student">Classe 4^CI • Anno Scolastico 2025/2026</div>
+        <!-- Aggiornato a Classe 5^CI e A.S. 2026/2027 -->
+        <div class="info-student">Classe 5^CI • Anno Scolastico 2026/2027</div>
     </div>
 
+    <!-- ESERCIZI ANNO CORRENTE (5^CI) -->
+    <div class="year-header">Esercitazioni Anno Corrente (5^CI)</div>
     <div class="main-grid">
-        <div class="folder-card" onclick="showSection('es02')">ES02</div>
-        <div class="folder-card" onclick="showSection('es03')">ES03</div>
-        <div class="folder-card" onclick="showSection('es04')">ES04</div>
-        <div class="folder-card" onclick="showSection('es05')">ES05</div>
-<div class="folder-card" onclick="showSection('es06')">ES06</div>
-<div class="folder-card" onclick="showSection('es07')">ES07</div>
-<div class="folder-card" onclick="showSection('es08')">ES08</div>
+        <div class="folder-card" onclick="showSection('es01_5ci', event)">ES01</div>
+        <!-- Aggiungi qui le nuove cartelle di quest'anno -->
     </div>
 
-    <div id="es02" class="exercise-section">
-        <div class="section-title">Esercitazione ES02</div>
+    <!-- ARCHIVIO ANNO PRECEDENTE (4^CI) -->
+    <div class="year-header">Archivio Anno Precedente (4^CI)</div>
+    <div class="main-grid">
+        <div class="folder-card archive" onclick="showSection('archivio4ci', event)">📁 Archivio 4^CI</div>
+    </div>
+
+    <!-- ================= SEZIONI ESERCIZI 5^CI ================= -->
+    <div id="es01_5ci" class="exercise-section">
+        <div class="section-title">Esercitazione ES01 (5^CI)</div>
+        <div class="grid">
+            <a href="ES01_5CI/index.html" class="card">
+                <div class="icon">🚀</div>
+                <h3>Esercizio 01</h3>
+                <p>Primo esercizio del nuovo anno</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- ================= ARCHIVIO 4^CI ================= -->
+    <div id="archivio4ci" class="exercise-section">
+        <div class="section-title">Raccolta Esercitazioni 4^CI (A.S. 2025/2026)</div>
+        
+        <div class="section-title" style="font-size: 1.1rem; margin-top: 20px;">ES02</div>
         <div class="grid">
             <a href="ES02/index.html" class="card">
                 <div class="icon">📁</div>
@@ -174,109 +203,58 @@
                 <p>Sviluppo Base JavaScript</p>
             </a>
         </div>
-    </div>
 
-    <div id="es03" class="exercise-section">
-        <div class="section-title">Esercitazione ES03</div>
+        <div class="section-title" style="font-size: 1.1rem; margin-top: 20px;">ES03</div>
         <div class="grid">
             <a href="ES03/esercizioA.html" class="card"><div class="icon">📦</div><h3>3A</h3><p>Volume Scatola</p></a>
             <a href="ES03/esercizioB.html" class="card"><div class="icon">📈</div><h3>3B</h3><p>Analisi Retta</p></a>
             <a href="ES03/esercizioC.html" class="card"><div class="icon">🎓</div><h3>3C</h3><p>Esito Voto</p></a>
             <a href="ES03/esercizioD.html" class="card"><div class="icon">🔑</div><h3>3D</h3><p>Let vs Var</p></a>
         </div>
-    </div>
 
-    <div id="es04" class="exercise-section">
-        <div class="section-title">Esercitazione ES04</div>
+        <div class="section-title" style="font-size: 1.1rem; margin-top: 20px;">ES04</div>
         <div class="grid">
-            <a href="ES04/esercizio1.txt" target="_blank" class="card">
-                <div class="icon">📝</div><h3>4A</h3><p>Operazioni Base</p></a>
-            <a href="ES04/calc.html" class="card">
-                <div class="icon">🧮</div><h3>4D</h3><p>Calcolatrice</p>
-            </a>
+            <a href="ES04/esercizio1.txt" target="_blank" class="card"><div class="icon">📝</div><h3>4A</h3><p>Operazioni Base</p></a>
+            <a href="ES04/calc.html" class="card"><div class="icon">🧮</div><h3>4D</h3><p>Calcolatrice</p></a>
         </div>
-    </div>
 
-    <div id="es05" class="exercise-section">
-        <div class="section-title" style="color: var(--node-green);">Esercitazione ES05</div>
+        <div class="section-title" style="font-size: 1.1rem; margin-top: 20px;">ES05</div>
         <div class="grid">
             <a href="ES05/persona.html" target="_blank" class="card"><div class="icon">👤</div><h3>5A</h3><p>Oggetto Persona</p></a>
             <a href="ES05/libro.html" target="_blank" class="card"><div class="icon">📖</div><h3>5B</h3><p>Ciclo for in</p></a>
             <a href="ES05/gestioneBiblioteca.html" target="_blank" class="card"><div class="icon">📚</div><h3>5C</h3><p>Biblioteca</p></a>
             <a href="ES05/bibliotecaJSON.html" target="_blank" class="card"><div class="icon">💾</div><h3>5D</h3><p>JSON Storage</p></a>
         </div>
-    </div>
-<div id="es06" class="exercise-section">
-        <div class="section-title">Esercitazione ES06</div>
+
+        <div class="section-title" style="font-size: 1.1rem; margin-top: 20px;">ES06</div>
         <div class="grid">
-            <a href="ES06/calcolatrice.html" class="card">
-                <div class="icon">🔢</div>
-                <h3>Esercizio 6A</h3>
-                <p>Calcolatrice Avanzata</p>
-            </a>
-            <a href="ES06/inverti.html" class="card">
-                <div class="icon">🔄</div>
-                <h3>Esercizio 6B</h3>
-                <p>Inversione cifre</p>
-            </a>
-<a href="ES06/tartaglia.html" class="card">
-    <div class="icon">📐</div>
-    <h3>Esercizio 6C</h3>
-    <p>Triangolo di Tartaglia</p>
-</a>
+            <a href="ES06/calcolatrice.html" class="card"><div class="icon">🔢</div><h3>6A</h3><p>Calcolatrice Avanzata</p></a>
+            <a href="ES06/inverti.html" class="card"><div class="icon">🔄</div><h3>6B</h3><p>Inversione cifre</p></a>
+            <a href="ES06/tartaglia.html" class="card"><div class="icon">📐</div><h3>6C</h3><p>Triangolo di Tartaglia</p></a>
+        </div>
+
+        <div class="section-title" style="font-size: 1.1rem; margin-top: 20px;">ES07 - Manipolazione DOM</div>
+        <div class="grid">
+            <a href="ES07/ES01.html" class="card"><div class="icon">🪟</div><h3>7A</h3><p>Proprietà Window</p></a>
+            <a href="ES07/ES02.html" class="card"><div class="icon">🧭</div><h3>7B</h3><p>Proprietà Navigator</p></a>
+            <a href="ES07/ES03.html" class="card"><div class="icon">🎨</div><h3>7C</h3><p>Stile Pulsanti</p></a>
+            <a href="ES07/ES04.html" class="card"><div class="icon">ABC</div><h3>7D</h3><p>Testo Maiuscolo</p></a>
+            <a href="ES07/ES05.html" class="card"><div class="icon">✖️</div><h3>7E</h3><p>Tavola Pitagorica</p></a>
+        </div>
+
+        <div class="section-title" style="font-size: 1.1rem; margin-top: 20px;">ES08 - Eventi Avanzati e Stringhe</div>
+        <div class="grid">
+            <a href="ES08/ESAE.html" class="card"><div class="icon">⚡</div><h3>8A</h3><p>Eventi e Callback</p></a>
+            <a href="ES08/ESGL.html" class="card"><div class="icon">🔤</div><h3>8B</h3><p>Stringhe ed Eventi</p></a>
         </div>
     </div>
-<div id="es07" class="exercise-section">
-        <div class="section-title">Esercitazione ES07 - Manipolazione DOM</div>
-        <div class="grid">
-            <a href="ES07/ES01.html" class="card">
-                <div class="icon">🪟</div>
-                <h3>7A</h3>
-                <p>Proprietà Window</p>
-            </a>
-            <a href="ES07/ES02.html" class="card">
-                <div class="icon">🧭</div>
-                <h3>7B</h3>
-                <p>Proprietà Navigator</p>
-            </a>
-            <a href="ES07/ES03.html" class="card">
-                <div class="icon">🎨</div>
-                <h3>7C</h3>
-                <p>Stile Pulsanti</p>
-            </a>
-            <a href="ES07/ES04.html" class="card">
-                <div class="icon">ABC</div>
-                <h3>7D</h3>
-                <p>Testo Maiuscolo</p>
-            </a>
-            <a href="ES07/ES05.html" class="card">
-                <div class="icon">✖️</div>
-                <h3>7E</h3>
-                <p>Tavola Pitagorica</p>
-            </a>
-        </div>
-    </div>
-<div id="es08" class="exercise-section">
-        <div class="section-title">Esercitazione ES08 - Eventi Avanzati e Stringhe</div>
-        <div class="grid">
-            <a href="ES08/ESAE.html" class="card">
-                <div class="icon">⚡</div>
-                <h3>8A</h3>
-                <p>Eventi e Callback</p>
-            </a>
-            <a href="ES08/ESGL.html" class="card">
-                <div class="icon">🔤</div>
-                <h3>8B</h3>
-                <p>Stringhe ed Eventi</p>
-            </a>
-        </div>
-    </div>
+
     <footer>
         &copy; 2026 Erica Bonalumi - Portfolio Esercitazioni
     </footer>
 
     <script>
-        function showSection(sectionId) {
+        function showSection(sectionId, event) {
             // Nascondi tutte le sezioni
             const sections = document.querySelectorAll('.exercise-section');
             sections.forEach(s => s.style.display = 'none');
@@ -287,13 +265,15 @@
 
             // Mostra la sezione cliccata
             const target = document.getElementById(sectionId);
-            target.style.display = 'block';
+            if (target) {
+                target.style.display = 'block';
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
 
             // Aggiungi classe active al pulsante cliccato
-            event.currentTarget.classList.add('active');
-            
-            // Scroll fluido verso la sezione
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
         }
     </script>
 </body>
